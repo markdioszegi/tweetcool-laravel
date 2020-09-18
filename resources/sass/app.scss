@@ -1,0 +1,114 @@
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+//fonts
+@import url('https://fonts.googleapis.com/css2?family=Ruda:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+html, body {
+    transition-timing-function: cubic-bezier(.21,.8,.24,1);
+    background-color: #fff;
+    font-family: 'Ruda', sans-serif;
+    font-weight: 200;
+    height: 100vh;
+    margin: 0;
+}
+
+#app {
+    width: 75%;
+    margin: auto;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.half-height {
+    height: 50vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    text-align: center;
+}
+
+.title {
+    font-family: "Pacifico", cursive;
+    font-size: 84px;
+    color: #304fd2;
+    user-select: none;
+}
+
+.links > a {
+    color: #304f63;
+    padding: 0 25px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+
+.fade-in-bottom {
+    animation: fadeIn .75s;
+}
+
+.logo {
+    width: 64px;
+}
+
+//---overrides
+.nav-link {
+    transition: hover .5s;
+}
+
+.dropdown-menu {
+    transform-origin: top center;
+    animation: rotateMenu .5s;
+}
+
+//---keyframes
+@keyframes fadeIn {
+    0% {
+        transform: translate3d(0, 20%, 0);
+        opacity:0;
+    }
+    100% {
+        transform: none;
+        opacity:1;
+    }
+}
+
+@keyframes rotateMenu {
+    0% {
+        transform: rotateX(-90deg);
+    }
+    50% {
+        transform: rotateX(10deg);
+    }
+    100% {
+        transform: rotateX(0deg);
+    }
+}
