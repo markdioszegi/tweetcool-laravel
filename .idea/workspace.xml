@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aa0237e7-25f0-4681-8204-53549e518495" name="Default Changelist" comment="" />
+    <list default="true" id="aa0237e7-25f0-4681-8204-53549e518495" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/tweets.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/tweets.blade.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +24,9 @@
         <option value="composer.json" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -159,7 +169,8 @@
       <option name="presentableId" value="Default" />
       <updated>1600330755076</updated>
       <workItem from="1600330756333" duration="14917000" />
-      <workItem from="1600415137138" duration="11734000" />
+      <workItem from="1600415137138" duration="14250000" />
+      <workItem from="1600685966428" duration="3352000" />
     </task>
     <servers />
   </component>
@@ -203,6 +214,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="708" y="213" width="1022" height="737" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1600351034999" />
+    <state x="647" y="87" width="626" height="933" key="find.popup" timestamp="1600687557677">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="647" y="87" width="626" height="933" key="find.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1600687557677" />
     <state x="624" y="252" key="run.anything.popup" timestamp="1600432651072">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>

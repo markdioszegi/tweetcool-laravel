@@ -53,18 +53,24 @@ html, body {
 .title {
     font-family: "Pacifico", cursive;
     font-size: 84px;
-    color: #304fd2;
+    color: #2f88c1;
     user-select: none;
 }
 
 .links > a {
-    color: #304f63;
+    color: #305168;
     padding: 0 25px;
     font-size: 16px;
     font-weight: 600;
     letter-spacing: .1rem;
     text-decoration: none;
     text-transform: uppercase;
+    transition: .25s;
+}
+
+.links > a:hover {
+    color: #2f88c1;
+    transform: scale(1.1);
 }
 
 .m-b-md {
@@ -81,7 +87,7 @@ html, body {
 
 //---overrides
 .nav-link {
-    transition: hover .5s;
+    transition: color .5s;
 }
 
 .dropdown-menu {

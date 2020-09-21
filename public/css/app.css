@@ -10946,7 +10946,7 @@ body {
 .title {
   font-family: "Pacifico", cursive;
   font-size: 84px;
-  color: #304fd2;
+  color: #2f88c1;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -10954,13 +10954,19 @@ body {
 }
 
 .links > a {
-  color: #304f63;
+  color: #305168;
   padding: 0 25px;
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.1rem;
   text-decoration: none;
   text-transform: uppercase;
+  transition: 0.25s;
+}
+
+.links > a:hover {
+  color: #2f88c1;
+  transform: scale(1.1);
 }
 
 .m-b-md {
@@ -10977,7 +10983,7 @@ body {
 }
 
 .nav-link {
-  transition: hover 0.5s;
+  transition: color 0.5s;
 }
 
 .dropdown-menu {
