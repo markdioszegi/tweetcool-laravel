@@ -347,7 +347,7 @@ false Asia/Srednekolymsk
 false Asia/Taipei
 false Asia/Tashkent
 false Asia/Tbilisi
-true Asia/Tehran
+false Asia/Tehran
 true Asia/Tel_Aviv
 false Asia/Thimbu
 false Asia/Thimphu
@@ -598,7 +598,7 @@ false Indian/Maldives
 false Indian/Mauritius
 false Indian/Mayotte
 false Indian/Reunion
-true Iran
+false Iran
 true Israel
 false JAYT
 false JST
@@ -1114,7 +1114,7 @@ false posix/Asia/Srednekolymsk
 false posix/Asia/Taipei
 false posix/Asia/Tashkent
 false posix/Asia/Tbilisi
-true posix/Asia/Tehran
+false posix/Asia/Tehran
 true posix/Asia/Tel_Aviv
 false posix/Asia/Thimbu
 false posix/Asia/Thimphu
@@ -1308,7 +1308,7 @@ false posix/Indian/Maldives
 false posix/Indian/Mauritius
 false posix/Indian/Mayotte
 false posix/Indian/Reunion
-true posix/Iran
+false posix/Iran
 true posix/Israel
 false posix/Jamaica
 false posix/Japan
@@ -1408,7 +1408,7 @@ true posix/WET
 false posix/Zulu
 true posixrules
 </TimeZones>
-      <StartupTime>1600334298</StartupTime>
+      <StartupTime>1600759946</StartupTime>
     </root>
     <database id="2" parent="1" name="postgres">
       <ObjectId>13463</ObjectId>
@@ -1418,11 +1418,13 @@ true posixrules
     <database id="3" parent="1" name="tweetcool">
       <ObjectId>16386</ObjectId>
       <Owner>dio</Owner>
-      <IntrospectionStateNumber>499</IntrospectionStateNumber>
+      <IntrospectionStateNumber>518</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|16387|16389|1
 sequence|table|16395|16397|1
 sequence|table|16415|16417|1
+sequence|table|16427|16429|1
+sequence|table|16449|16451|1
 </Relations>
     </database>
     <role id="4" parent="1" name="dio">
@@ -1481,7 +1483,7 @@ sequence|table|16415|16417|1
       <Comment>standard public schema</Comment>
       <StateNumber>275</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>500</IntrospectionStateNumber>
+      <IntrospectionStateNumber>519</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="17" parent="3" name="heap">
@@ -1551,45 +1553,142 @@ sequence|table|16415|16417|1
     <language id="26" parent="3" name="internal"/>
     <language id="27" parent="3" name="plpgsql"/>
     <language id="28" parent="3" name="sql"/>
-    <sequence id="29" parent="16" name="failed_jobs_id_seq">
+    <sequence id="29" parent="16" name="comments_id_seq">
+      <ObjectId>16449</ObjectId>
+      <Owner>dio</Owner>
+      <StateNumber>516</StateNumber>
+      <DataType>bigint|0s</DataType>
+    </sequence>
+    <sequence id="30" parent="16" name="failed_jobs_id_seq">
       <ObjectId>16415</ObjectId>
       <Owner>dio</Owner>
       <StateNumber>496</StateNumber>
       <DataType>bigint|0s</DataType>
     </sequence>
-    <sequence id="30" parent="16" name="migrations_id_seq">
+    <sequence id="31" parent="16" name="migrations_id_seq">
       <ObjectId>16387</ObjectId>
       <Owner>dio</Owner>
       <StateNumber>491</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <sequence id="31" parent="16" name="users_id_seq">
+    <sequence id="32" parent="16" name="tweets_id_seq">
+      <ObjectId>16427</ObjectId>
+      <Owner>dio</Owner>
+      <StateNumber>508</StateNumber>
+      <DataType>bigint|0s</DataType>
+    </sequence>
+    <sequence id="33" parent="16" name="users_id_seq">
       <ObjectId>16395</ObjectId>
       <Owner>dio</Owner>
       <StateNumber>492</StateNumber>
       <DataType>bigint|0s</DataType>
     </sequence>
-    <table id="32" parent="16" name="failed_jobs">
+    <table id="34" parent="16" name="comments">
+      <ObjectId>16451</ObjectId>
+      <Owner>dio</Owner>
+      <StateNumber>516</StateNumber>
+    </table>
+    <table id="35" parent="16" name="failed_jobs">
       <ObjectId>16417</ObjectId>
       <Owner>dio</Owner>
       <StateNumber>496</StateNumber>
     </table>
-    <table id="33" parent="16" name="migrations">
+    <table id="36" parent="16" name="migrations">
       <ObjectId>16389</ObjectId>
       <Owner>dio</Owner>
       <StateNumber>491</StateNumber>
     </table>
-    <table id="34" parent="16" name="password_resets">
+    <table id="37" parent="16" name="password_resets">
       <ObjectId>16408</ObjectId>
       <Owner>dio</Owner>
       <StateNumber>494</StateNumber>
     </table>
-    <table id="35" parent="16" name="users">
+    <table id="38" parent="16" name="tweets">
+      <ObjectId>16429</ObjectId>
+      <Owner>dio</Owner>
+      <StateNumber>508</StateNumber>
+    </table>
+    <table id="39" parent="16" name="users">
       <ObjectId>16397</ObjectId>
       <Owner>dio</Owner>
-      <StateNumber>492</StateNumber>
+      <StateNumber>508</StateNumber>
     </table>
-    <column id="36" parent="32" name="id">
+    <column id="40" parent="34" name="id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>516</StateNumber>
+      <DefaultExpression>nextval(&apos;comments_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="41" parent="34" name="user_id">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>516</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="42" parent="34" name="tweet_id">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>516</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="43" parent="34" name="message">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>516</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="44" parent="34" name="created_at">
+      <Position>5</Position>
+      <DataType>timestamp(0)|0s</DataType>
+      <StateNumber>516</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="45" parent="34" name="updated_at">
+      <Position>6</Position>
+      <DataType>timestamp(0)|0s</DataType>
+      <StateNumber>516</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <index id="46" parent="34" name="comments_pkey">
+      <ObjectId>16455</ObjectId>
+      <StateNumber>516</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="47" parent="34" name="comments_pkey">
+      <ObjectId>16456</ObjectId>
+      <StateNumber>516</StateNumber>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>comments_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="48" parent="34" name="comments_user_id_foreign">
+      <ObjectId>16457</ObjectId>
+      <StateNumber>516</StateNumber>
+      <ColNames>user_id</ColNames>
+      <RefTableId>16397</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>users</RefTableName>
+      <RefKeyName>users_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="49" parent="34" name="comments_tweet_id_foreign">
+      <ObjectId>16462</ObjectId>
+      <StateNumber>516</StateNumber>
+      <ColNames>tweet_id</ColNames>
+      <RefTableId>16429</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tweets</RefTableName>
+      <RefKeyName>tweets_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="50" parent="35" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
@@ -1597,35 +1696,35 @@ sequence|table|16415|16417|1
       <DefaultExpression>nextval(&apos;failed_jobs_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>20</TypeId>
     </column>
-    <column id="37" parent="32" name="connection">
+    <column id="51" parent="35" name="connection">
       <Position>2</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>496</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="38" parent="32" name="queue">
+    <column id="52" parent="35" name="queue">
       <Position>3</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>496</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="39" parent="32" name="payload">
+    <column id="53" parent="35" name="payload">
       <Position>4</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>496</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="40" parent="32" name="exception">
+    <column id="54" parent="35" name="exception">
       <Position>5</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>496</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="41" parent="32" name="failed_at">
+    <column id="55" parent="35" name="failed_at">
       <Position>6</Position>
       <DataType>timestamp(0)|0s</DataType>
       <NotNull>1</NotNull>
@@ -1633,21 +1732,21 @@ sequence|table|16415|16417|1
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <TypeId>1114</TypeId>
     </column>
-    <index id="42" parent="32" name="failed_jobs_pkey">
+    <index id="56" parent="35" name="failed_jobs_pkey">
       <ObjectId>16425</ObjectId>
       <StateNumber>496</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="43" parent="32" name="failed_jobs_pkey">
+    <key id="57" parent="35" name="failed_jobs_pkey">
       <ObjectId>16426</ObjectId>
       <StateNumber>496</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>failed_jobs_pkey</UnderlyingIndexName>
     </key>
-    <column id="44" parent="33" name="id">
+    <column id="58" parent="36" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1655,60 +1754,132 @@ sequence|table|16415|16417|1
       <DefaultExpression>nextval(&apos;migrations_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="45" parent="33" name="migration">
+    <column id="59" parent="36" name="migration">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>491</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="46" parent="33" name="batch">
+    <column id="60" parent="36" name="batch">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>491</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="47" parent="33" name="migrations_pkey">
+    <index id="61" parent="36" name="migrations_pkey">
       <ObjectId>16393</ObjectId>
       <StateNumber>491</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="48" parent="33" name="migrations_pkey">
+    <key id="62" parent="36" name="migrations_pkey">
       <ObjectId>16394</ObjectId>
       <StateNumber>491</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>migrations_pkey</UnderlyingIndexName>
     </key>
-    <column id="49" parent="34" name="email">
+    <column id="63" parent="37" name="email">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>494</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="50" parent="34" name="token">
+    <column id="64" parent="37" name="token">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>494</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="51" parent="34" name="created_at">
+    <column id="65" parent="37" name="created_at">
       <Position>3</Position>
       <DataType>timestamp(0)|0s</DataType>
       <StateNumber>494</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <index id="52" parent="34" name="password_resets_email_index">
+    <index id="66" parent="37" name="password_resets_email_index">
       <ObjectId>16414</ObjectId>
       <StateNumber>494</StateNumber>
       <ColNames>email</ColNames>
     </index>
-    <column id="53" parent="35" name="id">
+    <column id="67" parent="38" name="id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>508</StateNumber>
+      <DefaultExpression>nextval(&apos;tweets_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="68" parent="38" name="user_id">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>508</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="69" parent="38" name="topic">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>508</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="70" parent="38" name="message">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>508</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="71" parent="38" name="tags">
+      <Position>5</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>508</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="72" parent="38" name="created_at">
+      <Position>6</Position>
+      <DataType>timestamp(0)|0s</DataType>
+      <StateNumber>508</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="73" parent="38" name="updated_at">
+      <Position>7</Position>
+      <DataType>timestamp(0)|0s</DataType>
+      <StateNumber>508</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <index id="74" parent="38" name="tweets_pkey">
+      <ObjectId>16436</ObjectId>
+      <StateNumber>508</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="75" parent="38" name="tweets_pkey">
+      <ObjectId>16437</ObjectId>
+      <StateNumber>508</StateNumber>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>tweets_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="76" parent="38" name="tweets_user_id_foreign">
+      <ObjectId>16438</ObjectId>
+      <StateNumber>508</StateNumber>
+      <ColNames>user_id</ColNames>
+      <RefTableId>16397</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>users</RefTableName>
+      <RefKeyName>users_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="77" parent="39" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
@@ -1716,72 +1887,72 @@ sequence|table|16415|16417|1
       <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>20</TypeId>
     </column>
-    <column id="54" parent="35" name="name">
+    <column id="78" parent="39" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>492</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="55" parent="35" name="email">
+    <column id="79" parent="39" name="email">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>492</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="56" parent="35" name="email_verified_at">
+    <column id="80" parent="39" name="email_verified_at">
       <Position>4</Position>
       <DataType>timestamp(0)|0s</DataType>
       <StateNumber>492</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="57" parent="35" name="password">
+    <column id="81" parent="39" name="password">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>492</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="58" parent="35" name="remember_token">
+    <column id="82" parent="39" name="remember_token">
       <Position>6</Position>
       <DataType>varchar(100)|0s</DataType>
       <StateNumber>492</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="59" parent="35" name="created_at">
+    <column id="83" parent="39" name="created_at">
       <Position>7</Position>
       <DataType>timestamp(0)|0s</DataType>
       <StateNumber>492</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="60" parent="35" name="updated_at">
+    <column id="84" parent="39" name="updated_at">
       <Position>8</Position>
       <DataType>timestamp(0)|0s</DataType>
       <StateNumber>492</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <index id="61" parent="35" name="users_pkey">
+    <index id="85" parent="39" name="users_pkey">
       <ObjectId>16404</ObjectId>
       <StateNumber>492</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="62" parent="35" name="users_email_unique">
+    <index id="86" parent="39" name="users_email_unique">
       <ObjectId>16406</ObjectId>
       <StateNumber>492</StateNumber>
       <ColNames>email</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="63" parent="35" name="users_pkey">
+    <key id="87" parent="39" name="users_pkey">
       <ObjectId>16405</ObjectId>
       <StateNumber>492</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>users_pkey</UnderlyingIndexName>
     </key>
-    <key id="64" parent="35" name="users_email_unique">
+    <key id="88" parent="39" name="users_email_unique">
       <ObjectId>16407</ObjectId>
       <StateNumber>492</StateNumber>
       <ColNames>email</ColNames>

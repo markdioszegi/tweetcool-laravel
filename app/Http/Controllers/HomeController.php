@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
+use App\Tweet;
 use Illuminate\Http\Request;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -11,10 +14,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    /*public function __construct()
     {
         $this->middleware('auth');
-    }
+    }*/
 
     /**
      * Show the application dashboard.
@@ -23,6 +26,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $tweets = Tweet::all();
+        $max_tweets = config('app.max_tweets');
+        if(auth()->guest()) {
+            $tweets = $tweets->slice(random_int(0, sizeof($tweets) - $max_tweets), $max_tweets);
+        }
+        return view('home', ['tweets'=>$tweets, 'comments'=>Comment::all()]);
+    }
+
+    public function users(){
+        return view('users', ['users'=>User::all()]);
+    }
+
+    public function profile(){
+        return view('profile');
     }
 }

@@ -49743,6 +49743,37 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 var app = new Vue({
   el: '#app'
 });
+/**
+ * Functions
+ */
+
+$.fn.isInView = function isScrolledIntoView() {
+  var docViewTop = $(window).scrollTop();
+  var docViewBottom = docViewTop + $(window).height();
+  var elemTop = $(this).offset().top;
+  var elemBottom = elemTop + $(this).height();
+  return elemBottom < docViewBottom && elemTop > docViewTop;
+};
+
+$(document).ready(function () {
+  fadeInElements('.hidden');
+  $(window).scroll(function () {
+    fadeInElements('.hidden');
+  });
+});
+
+function fadeInElements(tag) {
+  try {
+    $(tag).each(function (index) {
+      //console.log($(this))
+      if ($(this).isInView()) {
+        $(this).addClass('fade-in-bottom');
+        $(this).removeClass("hidden");
+      }
+    });
+  } catch (err) {//if(err.type == TypeError);
+  }
+}
 
 /***/ }),
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
+use App\Tweet;
 use Illuminate\Http\Request;
 
 class TweetsController extends Controller
@@ -23,6 +25,6 @@ class TweetsController extends Controller
      */
     public function index()
     {
-        return view('tweets');
+        return view('tweets', ['tweets'=>Tweet::all(), 'comments'=>Comment::all()]);
     }
 }

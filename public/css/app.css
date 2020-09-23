@@ -10919,8 +10919,8 @@ body {
   height: 100vh;
 }
 
-.half-height {
-  height: 50vh;
+.guest-height {
+  height: 33vh;
 }
 
 .flex-center {
@@ -10946,7 +10946,7 @@ body {
 .title {
   font-family: "Pacifico", cursive;
   font-size: 84px;
-  color: #2f88c1;
+  color: #3490dc;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -10954,7 +10954,7 @@ body {
 }
 
 .links > a {
-  color: #305168;
+  color: #6574cd;
   padding: 0 25px;
   font-size: 16px;
   font-weight: 600;
@@ -10965,7 +10965,7 @@ body {
 }
 
 .links > a:hover {
-  color: #2f88c1;
+  color: #3490dc;
   transform: scale(1.1);
 }
 
@@ -10982,7 +10982,28 @@ body {
   width: 64px;
 }
 
-.nav-link {
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.tweet- .nav-link {
   transition: color 0.5s;
 }
 

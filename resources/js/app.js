@@ -30,3 +30,38 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+
+/**
+ * Functions
+ */
+
+$.fn.isInView = function isScrolledIntoView() {
+    let docViewTop = $(window).scrollTop();
+    let docViewBottom = docViewTop + $(window).height();
+
+    let elemTop = $(this).offset().top;
+    let elemBottom = elemTop + $(this).height();
+
+    return ((elemBottom < docViewBottom) && (elemTop > docViewTop));
+}
+
+$(document).ready(() => {
+    fadeInElements('.hidden')
+    $(window).scroll(() => {
+        fadeInElements('.hidden')
+    })
+});
+
+function fadeInElements(tag) {
+    try {
+        $(tag).each(function (index) {
+            //console.log($(this))
+            if ($(this).isInView()) {
+                $(this).addClass('fade-in-bottom');
+                $(this).removeClass("hidden");
+            }
+        })
+    } catch (err) {
+        //if(err.type == TypeError);
+    }
+}
