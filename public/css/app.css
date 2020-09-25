@@ -8299,7 +8299,8 @@ button.bg-dark:focus {
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
 }
 
-.shadow {
+.shadow,
+.tweet-box:hover {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
@@ -10903,10 +10904,10 @@ a.text-dark:focus {
 html,
 body {
   transition-timing-function: cubic-bezier(0.21, 0.8, 0.24, 1);
-  background-color: #fff;
+  background-color: #f8fafc;
   font-family: "Ruda", sans-serif;
   font-weight: 200;
-  height: 100vh;
+  min-height: 100%;
   margin: 0;
 }
 
@@ -11003,7 +11004,53 @@ tr:nth-child(even) {
   visibility: hidden;
 }
 
-.tweet- .nav-link {
+.social-icon {
+  color: #6574cd;
+  cursor: pointer;
+  transition: color 0.5s;
+}
+
+.social-icon:hover {
+  color: #3490dc;
+}
+
+.footer-copyright {
+  background-color: #1b1e21;
+}
+
+.tweet-box {
+  min-height: 10vh;
+  display: flex;
+  background-color: #fff;
+  padding: 16px;
+  width: 80%;
+  transition: box-shadow 0.5s;
+}
+
+.user-bio {
+  max-width: 64px;
+  min-width: 64px;
+  font-weight: 600;
+  word-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+  .tweet-box {
+    margin: 0;
+    width: 100%;
+  }
+}
+
+.profile-image-circle {
+  width: 48px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 50% 50%;
+     object-position: 50% 50%;
+  border-radius: 50%;
+}
+
+.nav-link {
   transition: color 0.5s;
 }
 

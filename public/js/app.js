@@ -49755,6 +49755,14 @@ $.fn.isInView = function isScrolledIntoView() {
   return elemBottom < docViewBottom && elemTop > docViewTop;
 };
 
+function scrollToTop() {
+  $(window).scrollTop(0);
+}
+/*
+    When the document is ready
+ */
+
+
 $(document).ready(function () {
   fadeInElements('.hidden');
   $(window).scroll(function () {

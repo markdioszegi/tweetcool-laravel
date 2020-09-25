@@ -17,6 +17,8 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/users', 'HomeController@users')->name('users');
-Route::get('/profile', 'HomeController@profile')->name('profile');
+//Route::get('/profile', 'HomeController@profile')->name('profile');
+Route::get('/profile/{id}', 'ProfileController@profile')->name('profile');
+
 //Route::get('/tweets', 'TweetsController@index')->name('tweets');
 

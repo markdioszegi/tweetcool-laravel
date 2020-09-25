@@ -17,7 +17,7 @@ class CreateTweetsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('topic');
-            $table->string('message');
+            $table->text('message');
             $table->string('tags');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');

@@ -34,4 +34,20 @@ class Tweet extends Model
     /*protected $casts = [
         'created_at' => 'datetime',
     ];*/
+
+    protected $perPage = 10;
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
+
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+
+    /*public static function allWithOwners()
+    {
+        return DB::select('select users.name as owner, tweets.* from tweets join users on tweets.user_id = users.id');
+    }*/
 }

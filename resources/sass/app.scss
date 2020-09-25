@@ -10,10 +10,10 @@
 
 html, body {
     transition-timing-function: cubic-bezier(.21, .8, .24, 1);
-    background-color: #fff;
+    background-color: $body-bg;
     font-family: 'Ruda', sans-serif;
     font-weight: 200;
-    height: 100vh;
+    min-height: 100%;
     margin: 0;
 }
 
@@ -105,9 +105,56 @@ tr:nth-child(even) {
     visibility: hidden;
 }
 
-.tweet-
+.social-icon {
+    color: $indigo;
+    cursor: pointer;
+    transition: color .5s;
+}
+
+.social-icon:hover {
+    color: $blue;
+}
+
+.footer-copyright {
+    background-color: #1b1e21;
+}
+
+.tweet-box {
+    min-height: 10vh; //change this later
+    display: flex;
+    background-color: $white;
+    padding: 16px;
+    width: 80%;
+    transition: box-shadow .5s;
+}
+
+.user-bio {
+    max-width: 64px;
+    min-width: 64px;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+    .tweet-box {
+        margin: 0;
+        width: 100%;
+    }
+}
+
+.tweet-box:hover {
+    @extend .shadow;
+}
+
+.profile-image-circle {
+    width: 48px;
+    object-fit: cover;
+    object-position: 50% 50%;
+    border-radius: 50%;
+}
 
 //---overrides
+
 .nav-link {
     transition: color .5s;
 }
