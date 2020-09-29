@@ -28,14 +28,14 @@ class HomeController extends Controller
          * Get every tweet with their owner
          */
         //$users = User::with('tweets')->get();
-        $tweets = Tweet::with('user')->get();
-        //error_log($users);
-
         $max_tweets = config('app.max_tweets');
+
         if (auth()->guest()) {
-            if ($tweets !== NULL) {
-                $tweets = $tweets->slice(random_int(0, sizeof($tweets) - $max_tweets), $max_tweets);
-            }
+            //if ($tweets !== NULL) {
+            $tweets = Tweet::with('user')->inRandomOrder()->limit($max_tweets)->get();
+            //}
+        } else {
+            $tweets = Tweet::with('user')->paginate();
         }
         return view('home', ['tweets' => $tweets]);
     }

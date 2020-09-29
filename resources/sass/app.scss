@@ -4,11 +4,15 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// External SCSS files
+@import 'confirm';
+
 //fonts
 @import url('https://fonts.googleapis.com/css2?family=Ruda:wght@400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 html, body {
+    font-size: calc(10px + .3vw);
     transition-timing-function: cubic-bezier(.21, .8, .24, 1);
     background-color: $body-bg;
     font-family: 'Ruda', sans-serif;
@@ -16,6 +20,10 @@ html, body {
     min-height: 100%;
     margin: 0;
 }
+
+//body {
+//    background: linear-gradient(360deg, $indigo 0%, $blue 100%);
+//}
 
 #app {
     width: 75%;
@@ -116,7 +124,7 @@ tr:nth-child(even) {
 }
 
 .footer-copyright {
-    background-color: #1b1e21;
+    background-color: $footer;
 }
 
 .tweet-box {
@@ -129,8 +137,8 @@ tr:nth-child(even) {
 }
 
 .user-bio {
-    max-width: 64px;
-    min-width: 64px;
+    max-width: 96px;
+    min-width: 96px;
     font-weight: 600;
     word-wrap: break-word;
 }
@@ -146,11 +154,86 @@ tr:nth-child(even) {
     @extend .shadow;
 }
 
+.btn-delete-tweet {
+    border: none;
+    background-color: transparent;
+    transition: color .25s;
+}
+
+.btn-delete-tweet:focus {
+    outline: none;
+}
+
+.btn-delete-tweet:hover {
+    color: $red;
+}
+
+.btn-edit-tweet {
+    border: none;
+    background-color: transparent;
+    transition: color .25s;
+}
+
+.btn-edit-tweet:focus {
+    outline: none;
+}
+
+.btn-edit-tweet:hover {
+    color: $blue;
+}
+
 .profile-image-circle {
     width: 48px;
     object-fit: cover;
     object-position: 50% 50%;
     border-radius: 50%;
+}
+
+.profile-image-circle:hover {
+    cursor: pointer;
+}
+
+.form > input[type = "text"] {
+    border: none;
+    background-color: $blue;
+}
+
+.btn-toggle-dark-mode {
+    border-radius: 100%;
+}
+
+.dark-mode {
+    filter: invert(1) hue-rotate(180deg);
+}
+
+.post-tweet {
+}
+
+.post-tweet input[type="submit"] {
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    width: 64px;
+    height: 32px;
+    color: $white;
+    background-color: $blue;
+    transition: background-color .3s, box-shadow .3s;
+}
+
+.post-tweet input[type="submit"]:hover {
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, .3);
+    background-color: $indigo;
+}
+
+.post-tweet textarea {
+    border: none;
+    border-bottom: 1px $gray-800 solid;
+    outline: none;
+    max-height: 20vh;
+}
+
+.post-tweet textarea:focus {
+    border-bottom: 1px $blue solid;
 }
 
 //---overrides
@@ -159,9 +242,9 @@ tr:nth-child(even) {
     transition: color .5s;
 }
 
-.dropdown-menu {
+.dropdown .dropdown-menu {
     transform-origin: top center;
-    animation: rotateMenu .5s;
+    animation: rotateMenuIn .3s ease alternate both;
 }
 
 //---keyframes
@@ -176,12 +259,18 @@ tr:nth-child(even) {
     }
 }
 
-@keyframes rotateMenu {
+@keyframes rotateMenuIn {
     0% {
         transform: rotateX(-90deg);
     }
-    50% {
-        transform: rotateX(10deg);
+    100% {
+        transform: rotateX(0deg);
+    }
+}
+
+@keyframes rotateMenuOut {
+    0% {
+        transform: rotateX(-90deg);
     }
     100% {
         transform: rotateX(0deg);

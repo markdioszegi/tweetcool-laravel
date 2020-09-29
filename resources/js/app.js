@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+import Confirm from './confirm';
 
 window.Vue = require('vue');
 
@@ -42,11 +43,8 @@ $.fn.isInView = function isScrolledIntoView() {
     let elemTop = $(this).offset().top;
     let elemBottom = elemTop + $(this).height();
 
-    return ((elemBottom < docViewBottom) && (elemTop > docViewTop));
-}
-
-function scrollToTop() {
-    $(window).scrollTop(0)
+    //return ((elemBottom < docViewBottom) && (elemTop > docViewTop));
+    return true;
 }
 
 /*
@@ -59,6 +57,15 @@ $(document).ready(() => {
         fadeInElements('.hidden')
     })
 });
+
+$(document).on('click', '#scrollToTop', (e) => {
+    e.preventDefault();
+    window.scrollTo({
+        top: 0,
+        left: 270,
+        behavior: "smooth"
+    })
+})
 
 function fadeInElements(tag) {
     try {
@@ -73,3 +80,40 @@ function fadeInElements(tag) {
         //if(err.type == TypeError);
     }
 }
+
+$(".btn-delete-tweet").click(function () {
+    Confirm.open({
+        title: 'Delete',
+        message: 'Are you sure to delete this tweet?',
+        okText: 'Yes',
+        cancelText: 'No',
+        onok: () => {
+            const id = $(this).data('id');
+            const token = $(this).data('token');
+            const baseUrl = 'http://localhost:8000/';
+            $.ajax({
+                url: baseUrl + 'tweets/delete/' + id,
+                type: 'DELETE',
+                dataType: "JSON",
+                data: {
+                    "id": id,
+                    "_method": 'DELETE',
+                    "_token": token
+                },
+            })
+            $(this).closest('.tweet-box').remove()
+        }
+    })
+})
+
+$('[aria-expanded]').change(function () {
+    console.log("changed!")
+})
+
+$('#toggleDarkMode').change(function () {
+    if ($(this).prop("checked")) {
+        $('html').addClass('dark-mode')
+    } else {
+        $('html').removeClass('dark-mode')
+    }
+})

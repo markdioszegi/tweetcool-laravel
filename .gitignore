@@ -12,7 +12,7 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 LEARN.md
-
+start-server.sh
 
 # Created by https://www.toptal.com/developers/gitignore/api/laravel,phpstorm+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=laravel,phpstorm+all

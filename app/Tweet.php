@@ -13,8 +13,9 @@ class Tweet extends Model
      *
      * @var array
      */
-    /*protected $fillable = [
-        'user_id', 'topic', 'message',
+
+/*    protected $fillable = [
+        'user_id', 'topic', 'message', 'tags'
     ];*/
 
     /**
@@ -42,7 +43,8 @@ class Tweet extends Model
         return $this->hasMany('App\Comment');
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo('App\User');
     }
 

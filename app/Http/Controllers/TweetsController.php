@@ -25,6 +25,34 @@ class TweetsController extends Controller
      */
     public function index()
     {
-        return view('tweets', ['tweets'=>Tweet::all(), 'comments'=>Comment::all()]);
+        $tweets = Tweet::all();
+        return view('tweets', ['tweets' => $tweets, 'comments' => Comment::all()]);
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'topic' => 'required',
+            'message' => 'required'
+        ]);
+
+        $tweet = new Tweet;
+        $tweet->user_id = auth()->id();
+        $tweet->topic = $request->input('topic');
+        $tweet->message = $request->input('message');
+        $tweet->tags = 'sample';
+        $tweet->save();
+
+        return redirect('/profile/' . auth()->id())->with('success', 'Tweet created successfully!');
+    }
+
+    public function delete($id)
+    {
+        error_log("deleting tweet: " . $id);
+        //Tweet::all()->find($id)->delete();
+        Tweet::destroy($id);
+        return response()->json([
+            'success' => 'Tweet has been deleted!'
+        ]);
     }
 }

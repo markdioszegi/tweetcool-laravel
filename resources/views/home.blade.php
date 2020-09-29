@@ -7,28 +7,14 @@
         @include('welcome')
     @endguest
     <div class="container">
+        @auth
+            @include('post_tweet')
+        @endauth
+
         @include('tweets')
+
         <div class="links">
-            Want to see more? <a onclick="scrollToTop" href="#">Log in</a>
+            Want to see more? <a id="scrollToTop" href="">Log in</a>
         </div>
     </div>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-    <h1 class="hidden">I should fade in : D</h1>
 @endsection

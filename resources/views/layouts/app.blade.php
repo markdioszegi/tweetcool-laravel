@@ -31,6 +31,10 @@
                 <img class="logo" src={{asset('img/logo.png')}}></img>
             </a>
 
+            <!-- Light/Dark mode toggle button -->
+            <i class="fas fa-moon"></i>
+            <input class="btn-toggle-dark-mode" type="checkbox" id="toggleDarkMode">
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
@@ -80,8 +84,8 @@
     <footer class="page-footer bg-dark shadow-sm">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 py-5">
-                    <div class="mb-5 flex-center">
+                <div class="col-md-12">
+                    <div class="p-5 flex-center">
                         <!-- Facebook -->
                         <a class="social-icon">
                             <i class="fab fa-facebook-f fa-lg mr-md-5 mr-3 fa-2x"> </i>
