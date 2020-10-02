@@ -12,7 +12,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 html, body {
-    font-size: calc(10px + .3vw);
+    font-size: calc(12px + .2vw);
     transition-timing-function: cubic-bezier(.21, .8, .24, 1);
     background-color: $body-bg;
     font-family: 'Ruda', sans-serif;
@@ -60,7 +60,7 @@ html, body {
 
 .title {
     font-family: "Pacifico", cursive;
-    font-size: 84px;
+    font-size: 5rem;
     color: $blue;
     user-select: none;
 }
@@ -68,7 +68,7 @@ html, body {
 .links > a {
     color: $indigo;
     padding: 0 25px;
-    font-size: 16px;
+    //font-size: 16px;
     font-weight: 600;
     letter-spacing: .1rem;
     text-decoration: none;
@@ -128,26 +128,47 @@ tr:nth-child(even) {
 }
 
 .tweet-box {
-    min-height: 10vh; //change this later
-    display: flex;
+    //min-height: 16vh; //change this later
+    border-bottom-right-radius: .5rem;
+    border-bottom-left-radius: .5rem;
     background-color: $white;
-    padding: 16px;
     width: 80%;
     transition: box-shadow .5s;
+
+    .comments-box {
+        border-bottom-right-radius: inherit;
+        border-bottom-left-radius: inherit;
+        background-color: $light-blue;
+
+        .comment-box {
+            color: white;
+            background-color: $indigo;
+        }
+    }
+
+    .post-comment {
+    }
+}
+
+.btn-delete-comment {
+    border: none;
+    background-color: transparent;
+    transition: color .25s;
+}
+
+.btn-delete-comment:focus {
+    outline: none;
+}
+
+.btn-delete-comment:hover {
+    color: $red;
 }
 
 .user-bio {
-    max-width: 96px;
-    min-width: 96px;
+    max-width: 6rem;
+    min-width: 6rem;
     font-weight: 600;
     word-wrap: break-word;
-}
-
-@media (max-width: 768px) {
-    .tweet-box {
-        margin: 0;
-        width: 100%;
-    }
 }
 
 .tweet-box:hover {
@@ -207,36 +228,95 @@ tr:nth-child(even) {
 }
 
 .post-tweet {
+    input[type="submit"] {
+        font-family: "Pacifico", cursive;
+        border: none;
+        outline: none;
+        border-radius: 8px;
+        width: 64px;
+        height: 32px;
+        color: $white;
+        background-color: $blue;
+        transition: background-color .3s, box-shadow .3s;
+    }
+
+    input[type="submit"]:hover, input[type="submit"]:focus {
+        box-shadow: 0 1px 10px 0 rgba(0, 0, 0, .3);
+        background-color: $indigo;
+    }
+
+    input[type="text"] {
+        @extend textarea
+    }
+
+    input[type="text"]:hover {
+        @extend textarea
+    }
 }
 
-.post-tweet input[type="submit"] {
+textarea {
     border: none;
-    outline: none;
-    border-radius: 8px;
-    width: 64px;
-    height: 32px;
-    color: $white;
-    background-color: $blue;
-    transition: background-color .3s, box-shadow .3s;
-}
-
-.post-tweet input[type="submit"]:hover {
-    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, .3);
-    background-color: $indigo;
-}
-
-.post-tweet textarea {
-    border: none;
+    border-radius: 1rem;
     border-bottom: 1px $gray-800 solid;
     outline: none;
-    max-height: 20vh;
+    transition: border-bottom-color .5s;
+    margin: 0;
+    padding: .5rem;
 }
 
-.post-tweet textarea:focus {
+textarea:focus {
     border-bottom: 1px $blue solid;
+    @extend .shadow-sm
+}
+
+.scroll-top {
+    position: fixed;
+    bottom: 4rem;
+    right: 4rem;
+    opacity: 0;
+    transition: all .3s;
+    z-index: 99;
+
+    button {
+        color: white;
+        border: 0;
+        outline: 0;
+        border-radius: 100%;
+        width: 4rem;
+        height: 4rem;
+        background-color: $blue;
+        transition: inherit;
+    }
+
+    button:hover {
+        background-color: $indigo;
+    }
+}
+
+.opacity-1 {
+    opacity: 1;
+}
+
+.btn-post-comment {
+    width: 3rem;
+    height: 3rem;
+    border: none;
+    border-radius: 100%;
+    background-color: $blue;
+    transition: background-color .3s;
+}
+
+.btn-post-comment:hover, .btn-post-comment:focus {
+    background-color: $indigo;
+    outline: none;
 }
 
 //---overrides
+
+.navbar-nav li:hover > .dropdown-menu {
+    display: block;
+    margin-top: 0; // remove the gap so it doesn't close
+}
 
 .nav-link {
     transition: color .5s;
@@ -274,5 +354,17 @@ tr:nth-child(even) {
     }
     100% {
         transform: rotateX(0deg);
+    }
+}
+
+// Phone compatibility
+@media (max-width: 768px) {
+    #app {
+        margin: 0;
+        width: 100%;
+    }
+
+    .tweet-box {
+        width: 100%;
     }
 }

@@ -6,15 +6,16 @@
     @guest
         @include('welcome')
     @endguest
-    <div class="container">
-        @auth
-            @include('post_tweet')
-        @endauth
 
-        @include('tweets')
+    @auth
+        @include('post_tweet')
+    @endauth
 
-        <div class="links">
-            Want to see more? <a id="scrollToTop" href="">Log in</a>
+    @include('tweets')
+
+    @guest
+        <div class="links text-center">
+            <a href="/login">Log in to see more</a>
         </div>
-    </div>
+    @endguest
 @endsection

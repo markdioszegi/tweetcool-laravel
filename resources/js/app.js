@@ -5,7 +5,13 @@
  */
 
 require('./bootstrap');
+import autosize from 'autosize';
 import Confirm from './confirm';
+
+/**
+ * Globals
+ */
+const BASE_URL = window.location.origin
 
 window.Vue = require('vue');
 
@@ -53,19 +59,27 @@ $.fn.isInView = function isScrolledIntoView() {
 
 $(document).ready(() => {
     fadeInElements('.hidden')
-    $(window).scroll(() => {
+    showScrollToTop()
+
+    $(window).scroll((e) => {
         fadeInElements('.hidden')
+        showScrollToTop()
     })
+
+    //autosize textarea elements
+    autosize($('textarea'))
 });
 
-$(document).on('click', '#scrollToTop', (e) => {
-    e.preventDefault();
-    window.scrollTo({
-        top: 0,
-        left: 270,
-        behavior: "smooth"
-    })
-})
+function showScrollToTop() {
+    let div = $('.scroll-top');
+    if (window.scrollY > $('nav').height() * 2) {
+        div.addClass('opacity-1')
+        div.find('button').prop('disabled', false)
+    } else {
+        div.removeClass('opacity-1')
+        div.find('button').prop('disabled', true)
+    }
+}
 
 function fadeInElements(tag) {
     try {
@@ -90,9 +104,8 @@ $(".btn-delete-tweet").click(function () {
         onok: () => {
             const id = $(this).data('id');
             const token = $(this).data('token');
-            const baseUrl = 'http://localhost:8000/';
             $.ajax({
-                url: baseUrl + 'tweets/delete/' + id,
+                url: BASE_URL + '/tweets/delete/' + id,
                 type: 'DELETE',
                 dataType: "JSON",
                 data: {
@@ -100,10 +113,32 @@ $(".btn-delete-tweet").click(function () {
                     "_method": 'DELETE',
                     "_token": token
                 },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(`Something went wrong: {}`, thrownError)
+                }
             })
             $(this).closest('.tweet-box').remove()
         }
     })
+})
+
+$(".btn-delete-comment").click(function () {
+    console.log("Deleted!")
+    //$(this.closest(comment))
+})
+
+$(".post-tweet").find('textarea').keydown(function (e) {
+    if (e.keyCode == 13 && !e.shiftKey) {
+        e.preventDefault()
+        $(this).closest('form').submit()
+    }
+})
+
+$(".comments-box").find('textarea').keydown(function (e) {
+    if (e.keyCode == 13 && !e.shiftKey) {
+        e.preventDefault()
+        $(this).closest('.post-comment').find('button').click()
+    }
 })
 
 $('[aria-expanded]').change(function () {
@@ -116,4 +151,38 @@ $('#toggleDarkMode').change(function () {
     } else {
         $('html').removeClass('dark-mode')
     }
+})
+
+$('.btn-scroll-top').click(() => {
+    window.scrollTo({
+        top: 0,
+        left: 270,
+        behavior: "smooth"
+    })
+})
+
+$('.btn-post-comment').click(function (e) {
+    const div = $(this).closest('.comments-box').find('div')[0]
+    const tweetId = $(this).data('tweet-id')
+    const userId = $(this).data('user-id')
+    const token = $(this).data('token')
+    const msg = $(this).parent().find('textarea').val()
+    $.ajax({
+        url: BASE_URL + "/comments/store",
+        type: "post",
+        dataType: "JSON",
+        data: {
+            "tweet_id": tweetId,
+            "user_id": userId,
+            "message": msg,
+            "_method": 'POST',
+            "_token": token
+        },
+        success: function () {
+            window.location.reload(true)
+        },
+        error: function (err, vm, info) {
+            console.log(info)
+        }
+    })
 })

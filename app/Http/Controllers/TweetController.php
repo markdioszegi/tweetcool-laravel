@@ -6,7 +6,7 @@ use App\Comment;
 use App\Tweet;
 use Illuminate\Http\Request;
 
-class TweetsController extends Controller
+class TweetController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -16,6 +16,34 @@ class TweetsController extends Controller
     public function __construct()
     {
         //$this->middleware('auth');
+    }
+
+    public function edit($id)
+    {
+        $tweet = Tweet::find($id);
+        if ($tweet && $tweet->user_id == auth()->id()) {
+            return view('edit_tweet')->with('tweet', $tweet);
+        }
+        abort(403);
+    }
+
+    public function update($id, Request $request)
+    {
+        $request->validate([
+            'message' => 'required|min:1',
+            'topic' => 'required'
+        ]);
+
+        $tweet = Tweet::find($id);
+        if ($tweet) {
+            $tweet->topic = $request->input('topic');
+            $tweet->message = $request->input('message');
+            $tweet->save();
+
+            return redirect('/profile/' . auth()->id())->with('success', "Tweet edited successfully!");
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -48,7 +76,6 @@ class TweetsController extends Controller
 
     public function delete($id)
     {
-        error_log("deleting tweet: " . $id);
         //Tweet::all()->find($id)->delete();
         Tweet::destroy($id);
         return response()->json([

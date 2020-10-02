@@ -15,13 +15,24 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+// Home
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/users', 'HomeController@users')->name('users');
+
+// Profile
+//Route::get('/users', 'HomeController@users')->name('users');
 //Route::get('/profile', 'HomeController@profile')->name('profile');
 Route::get('/profile/{id}', 'ProfileController@profile')->name('profile');
 
-Route::delete('/tweets/delete/{id}', 'TweetsController@delete')->name('delete');
-Route::post('/tweets/store', 'TweetsController@store')->name('store');
+// Tweets
+Route::delete('/tweets/delete/{id}', 'TweetController@delete')->name('delete');
+Route::post('/tweets/store', 'TweetController@store')->name('store');
+Route::get('/tweets/{id}/edit', 'TweetController@edit')->name('edit');
+Route::put('/tweets/{id}', 'TweetController@update')->name('update');
 
-//Route::get('/tweets', 'TweetsController@index')->name('tweets');
+
+// Comments
+Route::post('/comments/store', 'CommentController@store')->name('store');
+
+//Route::get('/tweets', 'HomeController@tweets')->name('tweets');
+//Route::get('/tweets', 'TweetController@index')->name('tweets');
 

@@ -26,7 +26,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="nav w-100">
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand float-right" href="{{ url('/') }}">
                 {{-- config('app.name', 'Tweetcool') --}}
                 <img class="logo" src={{asset('img/logo.png')}}></img>
             </a>
@@ -116,6 +116,11 @@
         </div>
         <div class="footer-copyright font-weight-bold text-white text-center py-3">© 2020</div>
     </footer>
+
+    <!-- Scroll to top -->
+    <div class="scroll-top">
+        <button class="btn-scroll-top"><i class="fas fa-arrow-up"></i></button>
+    </div>
 </div>
 </body>
 </html>

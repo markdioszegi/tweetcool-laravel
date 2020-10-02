@@ -1,7 +1,7 @@
 <div class="d-flex flex-column align-items-center mb-5">
     <div class="tweet-box shadow-sm hidden">
         <div class="post-tweet w-100">
-            <div class="d-flex flex-column align-items-center">
+            <div class="d-flex flex-column align-items-center p-3">
 
                 <h3 class="font-weight-bold user-select-none">What's on your mind?</h3>
 
@@ -13,7 +13,7 @@
                     </div>
                     <div class="p-1">
                         <textarea class="w-100" name="message" type="text" placeholder="Your message..."
-                                  data-toggle="tooltip" title="This one too."></textarea>
+                                  data-toggle="tooltip" title="This one too." required></textarea>
                     </div>
                     <input class="" type="submit" value="Tweet"/>
                 </form>

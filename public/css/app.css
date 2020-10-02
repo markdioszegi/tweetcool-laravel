@@ -254,7 +254,9 @@ input,
 button,
 select,
 optgroup,
-textarea {
+textarea,
+.post-tweet input[type=text]:hover,
+.post-tweet input[type=text] {
   margin: 0;
   font-family: inherit;
   font-size: inherit;
@@ -307,7 +309,9 @@ input[type=checkbox] {
   padding: 0;
 }
 
-textarea {
+textarea,
+.post-tweet input[type=text]:hover,
+.post-tweet input[type=text] {
   overflow: auto;
   resize: vertical;
 }
@@ -2258,7 +2262,8 @@ select.form-control[multiple] {
   height: auto;
 }
 
-textarea.form-control {
+textarea.form-control,
+.post-tweet input.form-control[type=text] {
   height: auto;
 }
 
@@ -2367,7 +2372,10 @@ textarea.form-control {
 }
 
 .was-validated textarea.form-control:valid,
-textarea.form-control.is-valid {
+.was-validated .post-tweet input.form-control[type=text]:valid,
+.post-tweet .was-validated input.form-control[type=text]:valid,
+textarea.form-control.is-valid,
+.post-tweet input.form-control.is-valid[type=text] {
   padding-right: calc(1.6em + 0.75rem);
   background-position: top calc(0.4em + 0.1875rem) right calc(0.4em + 0.1875rem);
 }
@@ -2482,7 +2490,10 @@ textarea.form-control.is-valid {
 }
 
 .was-validated textarea.form-control:invalid,
-textarea.form-control.is-invalid {
+.was-validated .post-tweet input.form-control[type=text]:invalid,
+.post-tweet .was-validated input.form-control[type=text]:invalid,
+textarea.form-control.is-invalid,
+.post-tweet input.form-control.is-invalid[type=text] {
   padding-right: calc(1.6em + 0.75rem);
   background-position: top calc(0.4em + 0.1875rem) right calc(0.4em + 0.1875rem);
 }
@@ -8295,7 +8306,9 @@ button.bg-dark:focus {
   white-space: normal;
 }
 
-.shadow-sm {
+.shadow-sm,
+textarea:focus,
+.post-tweet input[type=text]:focus {
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
 }
 
@@ -11076,7 +11089,7 @@ a.text-dark:focus {
 
 html,
 body {
-  font-size: calc(10px + .3vw);
+  font-size: calc(12px + .2vw);
   transition-timing-function: cubic-bezier(0.21, 0.8, 0.24, 1);
   background-color: #f8fafc;
   font-family: "Ruda", sans-serif;
@@ -11120,7 +11133,7 @@ body {
 
 .title {
   font-family: "Pacifico", cursive;
-  font-size: 84px;
+  font-size: 5rem;
   color: #3490dc;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -11131,7 +11144,6 @@ body {
 .links > a {
   color: #6574cd;
   padding: 0 25px;
-  font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.1rem;
   text-decoration: none;
@@ -11193,26 +11205,43 @@ tr:nth-child(even) {
 }
 
 .tweet-box {
-  min-height: 10vh;
-  display: flex;
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
   background-color: #fff;
-  padding: 16px;
   width: 80%;
   transition: box-shadow 0.5s;
 }
 
-.user-bio {
-  max-width: 96px;
-  min-width: 96px;
-  font-weight: 600;
-  word-wrap: break-word;
+.tweet-box .comments-box {
+  border-bottom-right-radius: inherit;
+  border-bottom-left-radius: inherit;
+  background-color: #abd6ff;
 }
 
-@media (max-width: 768px) {
-  .tweet-box {
-    margin: 0;
-    width: 100%;
-  }
+.tweet-box .comments-box .comment-box {
+  color: white;
+  background-color: #6574cd;
+}
+
+.btn-delete-comment {
+  border: none;
+  background-color: transparent;
+  transition: color 0.25s;
+}
+
+.btn-delete-comment:focus {
+  outline: none;
+}
+
+.btn-delete-comment:hover {
+  color: #e3342f;
+}
+
+.user-bio {
+  max-width: 6rem;
+  min-width: 6rem;
+  font-weight: 600;
+  word-wrap: break-word;
 }
 
 .btn-delete-tweet {
@@ -11270,6 +11299,7 @@ tr:nth-child(even) {
 }
 
 .post-tweet input[type=submit] {
+  font-family: "Pacifico", cursive;
   border: none;
   outline: none;
   border-radius: 8px;
@@ -11280,20 +11310,75 @@ tr:nth-child(even) {
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.post-tweet input[type=submit]:hover {
+.post-tweet input[type=submit]:hover,
+.post-tweet input[type=submit]:focus {
   box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.3);
   background-color: #6574cd;
 }
 
-.post-tweet textarea {
+textarea,
+.post-tweet input[type=text],
+.post-tweet input[type=text]:hover {
   border: none;
+  border-radius: 1rem;
   border-bottom: 1px #343a40 solid;
   outline: none;
-  max-height: 20vh;
+  transition: border-bottom-color 0.5s;
+  margin: 0;
+  padding: 0.5rem;
 }
 
-.post-tweet textarea:focus {
+textarea:focus,
+.post-tweet input[type=text]:focus {
   border-bottom: 1px #3490dc solid;
+}
+
+.scroll-top {
+  position: fixed;
+  bottom: 4rem;
+  right: 4rem;
+  opacity: 0;
+  transition: all 0.3s;
+  z-index: 99;
+}
+
+.scroll-top button {
+  color: white;
+  border: 0;
+  outline: 0;
+  border-radius: 100%;
+  width: 4rem;
+  height: 4rem;
+  background-color: #3490dc;
+  transition: inherit;
+}
+
+.scroll-top button:hover {
+  background-color: #6574cd;
+}
+
+.opacity-1 {
+  opacity: 1;
+}
+
+.btn-post-comment {
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  border-radius: 100%;
+  background-color: #3490dc;
+  transition: background-color 0.3s;
+}
+
+.btn-post-comment:hover,
+.btn-post-comment:focus {
+  background-color: #6574cd;
+  outline: none;
+}
+
+.navbar-nav li:hover > .dropdown-menu {
+  display: block;
+  margin-top: 0;
 }
 
 .nav-link {
@@ -11367,6 +11452,17 @@ tr:nth-child(even) {
 
   100% {
     transform: rotateX(0deg);
+  }
+}
+
+@media (max-width: 768px) {
+  #app {
+    margin: 0;
+    width: 100%;
+  }
+
+  .tweet-box {
+    width: 100%;
   }
 }
 

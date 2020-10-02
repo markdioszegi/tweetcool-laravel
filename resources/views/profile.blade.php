@@ -4,12 +4,11 @@
 
 @section('content')
     @if(auth()->user()->getAuthIdentifier() == $user->id)
-        <h1>This is your profile page</h1>
+        <h1>You are viewing your own profile page</h1>
+        @include('post_tweet')
     @else
         <h1>You are viewing {{ $user->name }}'s profile</h1>
     @endif
-
-    <h3>Should show my tweets here</h3>
 
     @if(session('success'))
         <div class="alert alert-success">
