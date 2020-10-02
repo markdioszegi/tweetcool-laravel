@@ -9,20 +9,24 @@
                 <div class="d-flex flex-column comment-box">
                     <!-- Mini use bio-->
                     <!-- TODO styling-->
-                    <div class="user-bio">
+                    <div class="user-bio m-1">
                         <small><a
                                 href={{ route('profile', $comment->user_id) }}>
                                 {{ \App\User::find($comment->user_id)->name }}
                             </a>
                         </small>
                     </div>
-                    <div class="">
-                        {{ $comment->message }}
+                    <div class="d-flex">
+                        <div class="quote">
+                            <div class="message flex-fill">
+                                {{ $comment->message }}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- If the user is the owner -->
                 @if($comment->user_id == auth()->id())
-                    <div class="dropdown flex-row">
+                    <div class="dropdown float-right">
                         <a class="p-3" role="button" id="dropdownOptionsMenu"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             <i class="fas fa-ellipsis-h"></i>

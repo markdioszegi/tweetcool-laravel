@@ -141,8 +141,16 @@ tr:nth-child(even) {
         background-color: $light-blue;
 
         .comment-box {
-            color: white;
-            background-color: $indigo;
+        }
+
+        .quote {
+            margin-left: 1rem;
+            border-left: 2px solid $gray-600;
+            padding-left: 1rem;
+        }
+
+        .message {
+
         }
     }
 

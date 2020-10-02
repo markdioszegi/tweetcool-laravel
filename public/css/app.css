@@ -11215,12 +11215,13 @@ tr:nth-child(even) {
 .tweet-box .comments-box {
   border-bottom-right-radius: inherit;
   border-bottom-left-radius: inherit;
-  background-color: #abd6ff;
+  background-color: #bcdcff;
 }
 
-.tweet-box .comments-box .comment-box {
-  color: white;
-  background-color: #6574cd;
+.tweet-box .comments-box .quote {
+  margin-left: 1rem;
+  border-left: 2px solid #6c757d;
+  padding-left: 1rem;
 }
 
 .btn-delete-comment {

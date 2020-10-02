@@ -8,7 +8,7 @@
                          class="profile-image-circle"
                          src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"/>
                     <p><a href={{ route('profile', $tweet->user->id) }}>{{ $tweet->user->name }}</a></p>
-                    <small>ID: {{ $tweet->id }}</small>
+                    {{--<small>ID: {{ $tweet->id }}</small>--}}
                 </div>
                 <!-- Message section -->
                 <div class="flex-fill">
