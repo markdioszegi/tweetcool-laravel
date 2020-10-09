@@ -11,9 +11,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Ruda:wght@400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-html, body {
-    font-size: calc(12px + .2vw);
-    transition-timing-function: cubic-bezier(.21, .8, .24, 1);
+html,
+body {
+    font-size: calc(14px + 0.1vw);
+    transition-timing-function: cubic-bezier(0.21, 0.8, 0.24, 1);
     background-color: $body-bg;
     font-family: 'Ruda', sans-serif;
     font-weight: 200;
@@ -50,8 +51,14 @@ html, body {
 
 .top-right {
     position: absolute;
-    right: 10px;
-    top: 18px;
+    right: 1rem;
+    top: 1rem;
+}
+
+.top-right-sm {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .content {
@@ -59,7 +66,7 @@ html, body {
 }
 
 .title {
-    font-family: "Pacifico", cursive;
+    font-family: 'Pacifico', cursive;
     font-size: 5rem;
     color: $blue;
     user-select: none;
@@ -70,10 +77,10 @@ html, body {
     padding: 0 25px;
     //font-size: 16px;
     font-weight: 600;
-    letter-spacing: .1rem;
+    letter-spacing: 0.1rem;
     text-decoration: none;
     text-transform: uppercase;
-    transition: .25s;
+    transition: 0.25s;
 }
 
 .links > a:hover {
@@ -86,7 +93,7 @@ html, body {
 }
 
 .fade-in-bottom {
-    animation: fadeIn .75s;
+    animation: fadeIn 0.75s;
 }
 
 .logo {
@@ -99,7 +106,8 @@ table {
     width: 100%;
 }
 
-td, th {
+td,
+th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
@@ -116,7 +124,7 @@ tr:nth-child(even) {
 .social-icon {
     color: $indigo;
     cursor: pointer;
-    transition: color .5s;
+    transition: color 0.5s;
 }
 
 .social-icon:hover {
@@ -129,18 +137,28 @@ tr:nth-child(even) {
 
 .tweet-box {
     //min-height: 16vh; //change this later
-    border-bottom-right-radius: .5rem;
-    border-bottom-left-radius: .5rem;
+    border-bottom-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
     background-color: $white;
     width: 80%;
-    transition: box-shadow .5s;
+    transition: box-shadow 0.5s;
 
-    .comments-box {
+    .comments-container {
         border-bottom-right-radius: inherit;
         border-bottom-left-radius: inherit;
         background-color: $light-blue;
 
-        .comment-box {
+        .comment {
+            .editing {
+                padding: 0.5rem;
+                border-radius: 1rem;
+                background-color: white;
+                width: 100%;
+            }
+
+            .editing:focus {
+                outline: none;
+            }
         }
 
         .quote {
@@ -148,28 +166,10 @@ tr:nth-child(even) {
             border-left: 2px solid $gray-600;
             padding-left: 1rem;
         }
-
-        .message {
-
-        }
     }
 
     .post-comment {
     }
-}
-
-.btn-delete-comment {
-    border: none;
-    background-color: transparent;
-    transition: color .25s;
-}
-
-.btn-delete-comment:focus {
-    outline: none;
-}
-
-.btn-delete-comment:hover {
-    color: $red;
 }
 
 .user-bio {
@@ -186,7 +186,7 @@ tr:nth-child(even) {
 .btn-delete-tweet {
     border: none;
     background-color: transparent;
-    transition: color .25s;
+    transition: color 0.25s;
 }
 
 .btn-delete-tweet:focus {
@@ -200,7 +200,7 @@ tr:nth-child(even) {
 .btn-edit-tweet {
     border: none;
     background-color: transparent;
-    transition: color .25s;
+    transition: color 0.25s;
 }
 
 .btn-edit-tweet:focus {
@@ -209,6 +209,14 @@ tr:nth-child(even) {
 
 .btn-edit-tweet:hover {
     color: $blue;
+}
+
+.btn-delete-comment {
+    @extend .btn-delete-tweet;
+}
+
+.btn-edit-comment {
+    @extend .btn-edit-tweet;
 }
 
 .profile-image-circle {
@@ -222,7 +230,7 @@ tr:nth-child(even) {
     cursor: pointer;
 }
 
-.form > input[type = "text"] {
+.form > input[type='text'] {
     border: none;
     background-color: $blue;
 }
@@ -236,29 +244,30 @@ tr:nth-child(even) {
 }
 
 .post-tweet {
-    input[type="submit"] {
-        font-family: "Pacifico", cursive;
+    input[type='submit'] {
+        font-family: 'Pacifico', cursive;
         border: none;
         outline: none;
-        border-radius: 8px;
+        border-radius: 1rem;
         width: 64px;
         height: 32px;
         color: $white;
         background-color: $blue;
-        transition: background-color .3s, box-shadow .3s;
+        transition: background-color 0.3s, box-shadow 0.3s;
     }
 
-    input[type="submit"]:hover, input[type="submit"]:focus {
-        box-shadow: 0 1px 10px 0 rgba(0, 0, 0, .3);
+    input[type='submit']:hover,
+    input[type='submit']:focus {
+        box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.3);
         background-color: $indigo;
     }
 
-    input[type="text"] {
-        @extend textarea
+    input[type='text'] {
+        @extend textarea;
     }
 
-    input[type="text"]:hover {
-        @extend textarea
+    input[type='text']:hover {
+        @extend textarea;
     }
 }
 
@@ -267,14 +276,14 @@ textarea {
     border-radius: 1rem;
     border-bottom: 1px $gray-800 solid;
     outline: none;
-    transition: border-bottom-color .5s;
+    transition: border-bottom-color 0.5s;
     margin: 0;
-    padding: .5rem;
+    padding: 0.5rem;
 }
 
 textarea:focus {
     border-bottom: 1px $blue solid;
-    @extend .shadow-sm
+    @extend .shadow-sm;
 }
 
 .scroll-top {
@@ -282,7 +291,7 @@ textarea:focus {
     bottom: 4rem;
     right: 4rem;
     opacity: 0;
-    transition: all .3s;
+    transition: all 0.3s;
     z-index: 99;
 
     button {
@@ -311,28 +320,61 @@ textarea:focus {
     border: none;
     border-radius: 100%;
     background-color: $blue;
-    transition: background-color .3s;
+    transition: background-color 0.3s;
 }
 
-.btn-post-comment:hover, .btn-post-comment:focus {
+.btn-post-comment:hover,
+.btn-post-comment:focus {
     background-color: $indigo;
     outline: none;
+}
+
+.options {
+    border: none;
+    text-align: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100%;
+    color: $blue;
+    background-color: transparent;
+    transition: background-color 0.25s, color 0.25s;
+}
+
+.options:hover,
+.options:focus {
+    outline: none;
+    background-color: $indigo;
+    color: $light-blue;
+}
+
+.profile {
+    //width: 100%;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .avatar {
+        width: 8rem;
+        height: 8rem;
+        border-radius: 50%;
+    }
 }
 
 //---overrides
 
 .navbar-nav li:hover > .dropdown-menu {
     display: block;
-    margin-top: 0; // remove the gap so it doesn't close
+    //margin-top: 0; // remove the gap so it doesn't close
 }
 
 .nav-link {
-    transition: color .5s;
+    transition: color 0.5s;
 }
 
 .dropdown .dropdown-menu {
     transform-origin: top center;
-    animation: rotateMenuIn .3s ease alternate both;
+    animation: rotateMenuIn 0.3s ease alternate both;
 }
 
 //---keyframes

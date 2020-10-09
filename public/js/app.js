@@ -50010,9 +50010,11 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var autosize__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! autosize */ "./node_modules/autosize/dist/autosize.js");
-/* harmony import */ var autosize__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(autosize__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _confirm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./confirm */ "./resources/js/confirm.js");
+/* harmony import */ var _confirm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./confirm */ "./resources/js/confirm.js");
+/* harmony import */ var autosize__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! autosize */ "./node_modules/autosize/dist/autosize.js");
+/* harmony import */ var autosize__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(autosize__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -50022,11 +50024,13 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
+
 /**
  * Globals
  */
 
 var BASE_URL = window.location.origin;
+var UNSAVED_CHANGES = false;
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
  * The following block of code may be used to automatically register your
@@ -50065,15 +50069,15 @@ $.fn.isInView = function isScrolledIntoView() {
  */
 
 
-$(document).ready(function () {
+document.addEventListener('DOMContentLoaded', function () {
   fadeInElements('.hidden');
   showScrollToTop();
   $(window).scroll(function (e) {
     fadeInElements('.hidden');
     showScrollToTop();
-  }); //autosize textarea elements
+  }); // Autosize textarea elements
 
-  autosize__WEBPACK_IMPORTED_MODULE_0___default()($('textarea'));
+  autosize__WEBPACK_IMPORTED_MODULE_1___default()($('textarea'));
 });
 
 function showScrollToTop() {
@@ -50094,19 +50098,19 @@ function fadeInElements(tag) {
       //console.log($(this))
       if ($(this).isInView()) {
         $(this).addClass('fade-in-bottom');
-        $(this).removeClass("hidden");
+        $(this).removeClass('hidden');
       }
     });
   } catch (err) {//if(err.type == TypeError);
   }
 }
 
-$(".btn-delete-tweet").click(function () {
+$('.btn-delete-tweet').click(function () {
   var _this = this;
 
-  _confirm__WEBPACK_IMPORTED_MODULE_1__["default"].open({
+  _confirm__WEBPACK_IMPORTED_MODULE_0__["default"].open({
     title: 'Delete',
-    message: 'Are you sure to delete this tweet?',
+    message: 'Are you sure you want to delete this tweet?',
     okText: 'Yes',
     cancelText: 'No',
     onok: function onok() {
@@ -50115,11 +50119,11 @@ $(".btn-delete-tweet").click(function () {
       $.ajax({
         url: BASE_URL + '/tweets/delete/' + id,
         type: 'DELETE',
-        dataType: "JSON",
+        dataType: 'JSON',
         data: {
-          "id": id,
-          "_method": 'DELETE',
-          "_token": token
+          id: id,
+          _method: 'DELETE',
+          _token: token
         },
         error: function error(xhr, ajaxOptions, thrownError) {
           console.log("Something went wrong: {}", thrownError);
@@ -50129,26 +50133,47 @@ $(".btn-delete-tweet").click(function () {
     }
   });
 });
-$(".btn-delete-comment").click(function () {
-  console.log("Deleted!"); //$(this.closest(comment))
+$('.btn-delete-comment').click(function () {
+  var _this2 = this;
+
+  _confirm__WEBPACK_IMPORTED_MODULE_0__["default"].open({
+    title: 'Delete',
+    message: 'Are you sure you want to delete this comment?',
+    okText: 'Yes',
+    cancelText: 'No',
+    onok: function onok() {
+      var id = $(_this2).data('id');
+      var token = $(_this2).data('token');
+      $.ajax({
+        url: BASE_URL + '/comments/delete/' + id,
+        method: 'DELETE',
+        dataType: 'JSON',
+        data: {
+          id: id,
+          _token: token
+        }
+      });
+      $(_this2).closest('.comment').remove();
+    }
+  });
 });
-$(".post-tweet").find('textarea').keydown(function (e) {
+$('.post-tweet').find('textarea').keydown(function (e) {
   if (e.keyCode == 13 && !e.shiftKey) {
     e.preventDefault();
     $(this).closest('form').submit();
   }
 });
-$(".comments-box").find('textarea').keydown(function (e) {
+$('.comments-container').find('textarea').keydown(function (e) {
   if (e.keyCode == 13 && !e.shiftKey) {
     e.preventDefault();
     $(this).closest('.post-comment').find('button').click();
   }
 });
 $('[aria-expanded]').change(function () {
-  console.log("changed!");
+  console.log('changed!');
 });
 $('#toggleDarkMode').change(function () {
-  if ($(this).prop("checked")) {
+  if ($(this).prop('checked')) {
     $('html').addClass('dark-mode');
   } else {
     $('html').removeClass('dark-mode');
@@ -50158,7 +50183,7 @@ $('.btn-scroll-top').click(function () {
   window.scrollTo({
     top: 0,
     left: 270,
-    behavior: "smooth"
+    behavior: 'smooth'
   });
 });
 $('.btn-post-comment').click(function (e) {
@@ -50168,15 +50193,15 @@ $('.btn-post-comment').click(function (e) {
   var token = $(this).data('token');
   var msg = $(this).parent().find('textarea').val();
   $.ajax({
-    url: BASE_URL + "/comments/store",
-    type: "post",
-    dataType: "JSON",
+    url: BASE_URL + '/comments/store',
+    type: 'post',
+    dataType: 'JSON',
     data: {
-      "tweet_id": tweetId,
-      "user_id": userId,
-      "message": msg,
-      "_method": 'POST',
-      "_token": token
+      tweet_id: tweetId,
+      user_id: userId,
+      message: msg,
+      _method: 'POST',
+      _token: token
     },
     success: function success() {
       window.location.reload(true);
@@ -50185,6 +50210,60 @@ $('.btn-post-comment').click(function (e) {
       console.log(info);
     }
   });
+});
+$('.btn-edit-comment').on('click', function () {
+  var EDIT_MODE = false;
+  var $message = $(this).closest('.comment').find('.message');
+  var $button = $(this);
+  var textEle = document.createElement('span');
+
+  if (EDIT_MODE) {
+    alert('You are already in edit mode!');
+  } else {
+    //console.log('Entering edit mode...')
+    $message.attr('contenteditable', 'true');
+    $message.addClass('editing');
+    textEle = document.createElement('span');
+    textEle.innerHTML = "<i class=\"fas fa-info mr-3 mt-3\"></i>Press enter to save or esc to cancel";
+    $message.parent().append(textEle); // Handle enter key event
+
+    $message.on('keydown', function (e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        var id = $button.data('id');
+        var token = $button.data('token');
+        var msg = $.trim($message.html());
+        e.preventDefault();
+        $message.attr('contenteditable', false);
+        $message.removeClass('editing');
+        textEle.remove();
+        EDIT_MODE = false; // Ajax
+
+        $.ajax({
+          url: BASE_URL + '/comments/' + id,
+          type: 'PUT',
+          data: {
+            id: id,
+            message: msg,
+            _token: token
+          },
+          error: function error(XMLHttpRequest, textStatus, errorThrown) {
+            console.error(errorThrown);
+          }
+        });
+      }
+    }); // Handle cancel when pressing the esc key
+
+    $(document).on('keyup', function (e) {
+      if (e.key === 'Escape' && EDIT_MODE) {
+        //console.log('Exiting edit mode...')
+        $message.attr('contenteditable', false);
+        $message.removeClass('editing');
+        textEle.remove();
+        EDIT_MODE = false;
+      }
+    });
+    EDIT_MODE = true;
+  }
 });
 
 /***/ }),
@@ -50382,8 +50461,8 @@ var Confirm = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/dio/Codecool Projects/tweetcool/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/dio/Codecool Projects/tweetcool/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\CodeCool Projects\PHPAdvanced\tweetcool-laravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\CodeCool Projects\PHPAdvanced\tweetcool-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

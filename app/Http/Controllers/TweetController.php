@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Tweet;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class TweetController extends Controller
 {
@@ -76,7 +78,6 @@ class TweetController extends Controller
 
     public function delete($id)
     {
-        //Tweet::all()->find($id)->delete();
         Tweet::destroy($id);
         return response()->json([
             'success' => 'Tweet has been deleted!'

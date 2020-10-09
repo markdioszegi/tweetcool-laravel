@@ -32,6 +32,8 @@ Route::put('/tweets/{id}', 'TweetController@update')->name('update');
 
 // Comments
 Route::post('/comments/store', 'CommentController@store')->name('store');
+Route::delete('/comments/delete/{id}', 'CommentController@delete')->name('delete');
+Route::put('/comments/{id}', 'CommentController@update')->name('update');
 
 //Route::get('/tweets', 'HomeController@tweets')->name('tweets');
 //Route::get('/tweets', 'TweetController@index')->name('tweets');

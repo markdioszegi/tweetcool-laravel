@@ -25,6 +25,8 @@ class ProfileController extends Controller
 
     public function profile($id)
     {
+        if(!User::find($id)) 
+            abort(404);
         $user = User::find($id);
         $tweets = $user->tweets()->orderBy('updated_at', 'desc')->paginate();
         return view('profile', compact('user', 'tweets'));

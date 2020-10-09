@@ -1,61 +1,67 @@
-<div class="comments-box">
-    <div class="d-flex flex-column p-3">
+<div class="comments-container">
+    <div class="d-flex flex-column p-3 position-relative">
         @if($tweet->comments->isEmpty())
-            <div class="text-center font-italic">
-                <p>It's really quiet there <i class="fas fa-sad-tear"></i></p>
-            </div>
+        <div class="text-center font-italic">
+            <p>It's really quiet there <i class="fas fa-sad-tear"></i></p>
+        </div>
         @else
+        <div class="mb-3">
             @foreach($tweet->comments as $comment)
-                <div class="d-flex flex-column comment-box">
-                    <!-- Mini use bio-->
-                    <!-- TODO styling-->
-                    <div class="user-bio m-1">
-                        <small><a
-                                href={{ route('profile', $comment->user_id) }}>
+            <div class="d-flex flex-column position-relative comment">
+                <!-- Mini user bio-->
+                <!-- TODO styling-->
+                <div class="user-bio mw-100">
+                    <div class="flex">
+                        <small><a href={{ route('profile', $comment->user_id) }}>
                                 {{ \App\User::find($comment->user_id)->name }}
                             </a>
                         </small>
-                    </div>
-                    <div class="d-flex">
-                        <div class="quote">
-                            <div class="message flex-fill">
-                                {{ $comment->message }}
+                        <small>—</small>
+                        {{-- Display time --}}
+                        <small>{{$comment->created_at->diffForHumans()}}</small>
+                        <!-- If the user is the owner -->
+                        @auth
+                        @if($comment->user_id == auth()->id())
+                        <div class="btn-group">
+                            <button class="options p-1" id="dropdownOptionsMenu" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownOptionsMenu">
+                                <button data-id="{{$comment->id}}" data-token="{{csrf_token()}}"
+                                    class="btn-edit-comment"><i class="fas fa-edit fa-2x"></i>Edit
+                                </button>
+                                <button data-id="{{$comment->id}}" data-token="{{ csrf_token() }}"
+                                    class="btn-delete-comment"><i class="fas fa-trash fa-2x"></i>Remove
+                                </button>
                             </div>
                         </div>
+                        @endif
+                        @endauth
                     </div>
                 </div>
-                <!-- If the user is the owner -->
-                @if($comment->user_id == auth()->id())
-                    <div class="dropdown float-right">
-                        <a class="p-3" role="button" id="dropdownOptionsMenu"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            <i class="fas fa-ellipsis-h"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownOptionsMenu">
-                            <button data-id="{{$tweet->id}}" data-token="{{csrf_token()}}"
-                                    class="btn-edit-tweet"><i
-                                    class="fas fa-edit fa-2x"></i>Edit
-                            </button>
-                            <button data-id="{{$tweet->id}}" data-token="{{ csrf_token() }}"
-                                    class="btn-delete-tweet"><i
-                                    class="fas fa-trash fa-2x"></i>Remove
-                            </button>
+                <div class="d-flex">
+                    <div class="quote">
+                        <div class="message flex-fill">
+                            {{ $comment->message }}
                         </div>
                     </div>
-                @endif
-
-            @endforeach
-        @endif
-        @auth
-            <div class="d-flex align-items-start post-comment">
-                <div class="flex-fill mr-3">
-                    <textarea class="w-100" placeholder="Leave a comment..." required></textarea>
                 </div>
-                <button class="btn-post-comment" data-tweet-id="{{$tweet->id}}"
-                        data-user-id="{{auth()->user()->getAuthIdentifier()}}"
-                        data-token="{{csrf_token()}}"><i class="fas fa-paper-plane"></i>
-                </button>
             </div>
+            @endforeach
+        </div>
+        @endif
+        <!-- if the user is logged in -->
+        @auth
+        <div class="d-flex align-items-start post-comment">
+            <div class="flex-fill mr-3">
+                <textarea maxlength="300" class="w-100" placeholder="Leave a comment..." required></textarea>
+            </div>
+            <button class="btn-post-comment" data-tweet-id="{{$tweet->id}}"
+                data-user-id="{{auth()->user()->getAuthIdentifier()}}" data-token="{{csrf_token()}}"><i
+                    class="fas fa-paper-plane"></i>
+            </button>
+        </div>
         @endauth
     </div>
 </div>

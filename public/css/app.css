@@ -11089,7 +11089,7 @@ a.text-dark:focus {
 
 html,
 body {
-  font-size: calc(12px + .2vw);
+  font-size: calc(14px + 0.1vw);
   transition-timing-function: cubic-bezier(0.21, 0.8, 0.24, 1);
   background-color: #f8fafc;
   font-family: "Ruda", sans-serif;
@@ -11123,8 +11123,14 @@ body {
 
 .top-right {
   position: absolute;
-  right: 10px;
-  top: 18px;
+  right: 1rem;
+  top: 1rem;
+}
+
+.top-right-sm {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .content {
@@ -11212,30 +11218,27 @@ tr:nth-child(even) {
   transition: box-shadow 0.5s;
 }
 
-.tweet-box .comments-box {
+.tweet-box .comments-container {
   border-bottom-right-radius: inherit;
   border-bottom-left-radius: inherit;
   background-color: #bcdcff;
 }
 
-.tweet-box .comments-box .quote {
-  margin-left: 1rem;
-  border-left: 2px solid #6c757d;
-  padding-left: 1rem;
+.tweet-box .comments-container .comment .editing {
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background-color: white;
+  width: 100%;
 }
 
-.btn-delete-comment {
-  border: none;
-  background-color: transparent;
-  transition: color 0.25s;
-}
-
-.btn-delete-comment:focus {
+.tweet-box .comments-container .comment .editing:focus {
   outline: none;
 }
 
-.btn-delete-comment:hover {
-  color: #e3342f;
+.tweet-box .comments-container .quote {
+  margin-left: 1rem;
+  border-left: 2px solid #6c757d;
+  padding-left: 1rem;
 }
 
 .user-bio {
@@ -11245,31 +11248,37 @@ tr:nth-child(even) {
   word-wrap: break-word;
 }
 
-.btn-delete-tweet {
+.btn-delete-tweet,
+.btn-delete-comment {
   border: none;
   background-color: transparent;
   transition: color 0.25s;
 }
 
-.btn-delete-tweet:focus {
+.btn-delete-tweet:focus,
+.btn-delete-comment:focus {
   outline: none;
 }
 
-.btn-delete-tweet:hover {
+.btn-delete-tweet:hover,
+.btn-delete-comment:hover {
   color: #e3342f;
 }
 
-.btn-edit-tweet {
+.btn-edit-tweet,
+.btn-edit-comment {
   border: none;
   background-color: transparent;
   transition: color 0.25s;
 }
 
-.btn-edit-tweet:focus {
+.btn-edit-tweet:focus,
+.btn-edit-comment:focus {
   outline: none;
 }
 
-.btn-edit-tweet:hover {
+.btn-edit-tweet:hover,
+.btn-edit-comment:hover {
   color: #3490dc;
 }
 
@@ -11303,7 +11312,7 @@ tr:nth-child(even) {
   font-family: "Pacifico", cursive;
   border: none;
   outline: none;
-  border-radius: 8px;
+  border-radius: 1rem;
   width: 64px;
   height: 32px;
   color: #fff;
@@ -11377,9 +11386,39 @@ textarea:focus,
   outline: none;
 }
 
+.options {
+  border: none;
+  text-align: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 100%;
+  color: #3490dc;
+  background-color: transparent;
+  transition: background-color 0.25s, color 0.25s;
+}
+
+.options:hover,
+.options:focus {
+  outline: none;
+  background-color: #6574cd;
+  color: #bcdcff;
+}
+
+.profile {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.profile .avatar {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+}
+
 .navbar-nav li:hover > .dropdown-menu {
   display: block;
-  margin-top: 0;
 }
 
 .nav-link {

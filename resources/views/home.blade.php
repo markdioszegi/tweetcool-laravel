@@ -3,19 +3,19 @@
 @section('title', auth()->user() ? auth()->user()->name . '\'s feed' : 'Tweetcool')
 
 @section('content')
-    @guest
-        @include('welcome')
-    @endguest
+@guest
+@include('welcome')
+@endguest
 
-    @auth
-        @include('post_tweet')
-    @endauth
+@auth
+@include('post_tweet')
+@endauth
 
-    @include('tweets')
+@include('tweets')
 
-    @guest
-        <div class="links text-center">
-            <a href="/login">Log in to see more</a>
-        </div>
-    @endguest
+@guest
+<div class="links text-center">
+    <a href="/login">Log in to see more</a>
+</div>
+@endguest
 @endsection

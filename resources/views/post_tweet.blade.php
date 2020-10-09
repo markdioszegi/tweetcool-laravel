@@ -9,13 +9,13 @@
                     @csrf
                     <div class="p-1">
                         <input autocomplete="off" class="" name="topic" type="text" placeholder="Topic name..."
-                               required/>
+                            maxlength="255" required />
                     </div>
                     <div class="p-1">
                         <textarea class="w-100" name="message" type="text" placeholder="Your message..."
-                                  data-toggle="tooltip" title="This one too." required></textarea>
+                            data-toggle="tooltip" title="This one too." required></textarea>
                     </div>
-                    <input class="" type="submit" value="Tweet"/>
+                    <input class="" type="submit" value="Tweet" />
                 </form>
             </div>
         </div>
