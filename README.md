@@ -65,10 +65,8 @@ php artisan key:generate
 ## Web routes
 
 -   "/" - Home page where
-    -   guests can log in or register an account via the `/login` and register `/routes`
+    -   guests can log in or register an account via the `/login` and `/register` routes
     -   users can view the global feed
--   /login - Login page
--   /register - Register page
 -   /profile/{id} - The users profile page
 
 ## Tweeting
