@@ -7,15 +7,17 @@
 require('./bootstrap')
 import Confirm from './confirm'
 import autosize from 'autosize'
-import { keys, update } from 'lodash'
+import { ajax } from 'jquery'
+import { method } from 'lodash'
 
 /**
  * Globals
  */
 const BASE_URL = window.location.origin
 let UNSAVED_CHANGES = false
+let EDIT_MODE = false
 
-window.Vue = require('vue')
+//window.Vue = require('vue')
 
 /**
  * The following block of code may be used to automatically register your
@@ -28,7 +30,7 @@ window.Vue = require('vue')
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default)
+//Vue.component('example-component', require('./components/ExampleComponent.vue').default)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -36,8 +38,30 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
+/**
+ * Bootstrap init
+ */
+
+$(function() {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+
+// Add slideDown animation to Bootstrap dropdown when expanding.
+$('.dropdown').on('show.bs.dropdown', function() {
+    $(this)
+        .find('.dropdown-menu')
+        .first()
+        .stop(true, true)
+        .slideDown('fast')
+})
+
+// Add slideUp animation to Bootstrap dropdown when collapsing.
+$('.dropdown').on('hide.bs.dropdown', function() {
+    $(this)
+        .find('.dropdown-menu')
+        .first()
+        .stop(true, true)
+        .slideUp('fast')
 })
 
 /**
@@ -135,6 +159,7 @@ $('.btn-delete-comment').click(function() {
         onok: () => {
             let id = $(this).data('id')
             let token = $(this).data('token')
+            EDIT_MODE = false
             $.ajax({
                 url: BASE_URL + '/comments/delete/' + id,
                 method: 'DELETE',
@@ -180,9 +205,31 @@ $('[aria-expanded]').change(function() {
 
 $('#toggleDarkMode').change(function() {
     if ($(this).prop('checked')) {
-        $('html').addClass('dark-mode')
+        $.ajax({
+            method: 'POST',
+            data: {
+                toggle: true,
+                _token: $(this).data('token'),
+            },
+            url: BASE_URL + '/profile/toggleDarkMode',
+            success: function(data) {
+                console.log(data)
+            },
+        })
+        $('body').addClass('dark-mode')
     } else {
-        $('html').removeClass('dark-mode')
+        $.ajax({
+            method: 'POST',
+            data: {
+                toggle: false,
+                _token: $(this).data('token'),
+            },
+            url: BASE_URL + '/profile/toggleDarkMode',
+            success: function(data) {
+                console.log(data)
+            },
+        })
+        $('body').removeClass('dark-mode')
     }
 })
 
@@ -205,6 +252,8 @@ $('.btn-post-comment').click(function(e) {
         .parent()
         .find('textarea')
         .val()
+        .trim()
+    if (!msg) console.log('Empty text!')
     $.ajax({
         url: BASE_URL + '/comments/store',
         type: 'post',
@@ -226,7 +275,6 @@ $('.btn-post-comment').click(function(e) {
 })
 
 $('.btn-edit-comment').on('click', function() {
-    let EDIT_MODE = false
     let $message = $(this)
         .closest('.comment')
         .find('.message')
@@ -250,7 +298,9 @@ $('.btn-edit-comment').on('click', function() {
             if (e.key === 'Enter' && !e.shiftKey) {
                 let id = $button.data('id')
                 let token = $button.data('token')
-                let msg = $.trim($message.html())
+                let msg = $.trim($message.text())
+
+                console.log(msg)
 
                 e.preventDefault()
                 $message.attr('contenteditable', false)

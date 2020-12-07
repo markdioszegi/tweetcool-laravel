@@ -25,11 +25,12 @@
                         <i class="fas fa-ellipsis-h"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownOptionsMenu">
-                        <button onclick='location.href="/tweets/{{ $tweet->id }}/edit"' class="btn-edit-tweet">
-                            <i class="fas fa-edit fa-2x"></i>Edit
+                        <button onclick='location.href="/tweets/{{ $tweet->id }}/edit"'
+                            class="btn-edit-tweet w-100 text-left">
+                            <i class="fas fa-edit mr-2"></i>Edit
                         </button>
-                        <button data-id="{{$tweet->id}}" data-token="{{ csrf_token() }}" class="btn-delete-tweet"><i
-                                class="fas fa-trash fa-2x"></i>Remove
+                        <button data-id="{{$tweet->id}}" data-token="{{ csrf_token() }}"
+                            class="btn-delete-tweet w-100 text-left"><i class="fas fa-trash mr-2"></i>Remove
                         </button>
                     </div>
                 </div>

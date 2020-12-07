@@ -13,21 +13,51 @@
 
 html,
 body {
-    font-size: calc(14px + 0.1vw);
+    font-size                 : calc(14px + 0.1vw);
     transition-timing-function: cubic-bezier(0.21, 0.8, 0.24, 1);
-    background-color: $body-bg;
-    font-family: 'Ruda', sans-serif;
-    font-weight: 200;
-    min-height: 100%;
-    margin: 0;
+    background-color          : $body-bg;
+    font-family               : 'Ruda', sans-serif;
+    font-weight               : 200;
+    -webkit-font-smoothing    : antialiased;
+    margin                    : 0;
 }
+
+img {
+    -webkit-backface-visibility: hidden;
+    -ms-transform              : translateZ(0);
+    /* IE 9 */
+    -webkit-transform          : translateZ(0);
+    /* Chrome, Safari, Opera */
+    transform                  : translateZ(0);
+}
+
+/* main {
+    min-height: 65.9118vh;
+} */
 
 //body {
 //    background: linear-gradient(360deg, $indigo 0%, $blue 100%);
 //}
 
+/*width*/
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/*track*/
+::-webkit-scrollbar-track {
+    background   : $light-blue;
+    border-radius: 1em;
+}
+
+/*thumb*/
+::-webkit-scrollbar-thumb {
+    background   : $cyan;
+    border-radius: 1em;
+}
+
 #app {
-    width: 75%;
+    width : 80%;
     margin: auto;
 }
 
@@ -40,8 +70,8 @@ body {
 }
 
 .flex-center {
-    align-items: center;
-    display: flex;
+    align-items    : center;
+    display        : flex;
     justify-content: center;
 }
 
@@ -51,14 +81,14 @@ body {
 
 .top-right {
     position: absolute;
-    right: 1rem;
-    top: 1rem;
+    right   : 1rem;
+    top     : 1rem;
 }
 
 .top-right-sm {
     position: absolute;
-    top: 0;
-    right: 0;
+    top     : 0;
+    right   : 0;
 }
 
 .content {
@@ -67,24 +97,24 @@ body {
 
 .title {
     font-family: 'Pacifico', cursive;
-    font-size: 5rem;
-    color: $blue;
+    font-size  : 5rem;
+    color      : $blue;
     user-select: none;
 }
 
-.links > a {
-    color: $indigo;
-    padding: 0 25px;
+.links>a {
+    color          : $indigo;
+    padding        : 0 25px;
     //font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 0.1rem;
+    font-weight    : 600;
+    letter-spacing : 0.1rem;
     text-decoration: none;
-    text-transform: uppercase;
-    transition: 0.25s;
+    text-transform : uppercase;
+    transition     : 0.25s;
 }
 
-.links > a:hover {
-    color: $blue;
+.links>a:hover {
+    color    : $blue;
     transform: scale(1.1);
 }
 
@@ -97,20 +127,25 @@ body {
 }
 
 .logo {
-    width: 64px;
+    width     : 76px;
+    transition: transform .15s ease;
+
+    &:hover {
+        transform: scale(1.02);
+    }
 }
 
 table {
-    font-family: arial, sans-serif;
+    font-family    : arial, sans-serif;
     border-collapse: collapse;
-    width: 100%;
+    width          : 100%;
 }
 
 td,
 th {
-    border: 1px solid #dddddd;
+    border    : 1px solid #dddddd;
     text-align: left;
-    padding: 8px;
+    padding   : 8px;
 }
 
 tr:nth-child(even) {
@@ -122,8 +157,8 @@ tr:nth-child(even) {
 }
 
 .social-icon {
-    color: $indigo;
-    cursor: pointer;
+    color     : $indigo;
+    cursor    : pointer;
     transition: color 0.5s;
 }
 
@@ -138,22 +173,22 @@ tr:nth-child(even) {
 .tweet-box {
     //min-height: 16vh; //change this later
     border-bottom-right-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
-    background-color: $white;
-    width: 80%;
-    transition: box-shadow 0.5s;
+    border-bottom-left-radius : 0.5rem;
+    background-color          : $white;
+    width                     : 80%;
+    transition                : box-shadow 0.5s;
 
     .comments-container {
         border-bottom-right-radius: inherit;
-        border-bottom-left-radius: inherit;
-        background-color: $light-blue;
+        border-bottom-left-radius : inherit;
+        background-color          : $light-blue;
 
         .comment {
             .editing {
-                padding: 0.5rem;
-                border-radius: 1rem;
+                padding         : 0.5rem;
+                border-radius   : 1rem;
                 background-color: white;
-                width: 100%;
+                width           : 100%;
             }
 
             .editing:focus {
@@ -162,21 +197,20 @@ tr:nth-child(even) {
         }
 
         .quote {
-            margin-left: 1rem;
-            border-left: 2px solid $gray-600;
+            margin-left : 1rem;
+            border-left : 2px solid $gray-600;
             padding-left: 1rem;
         }
     }
 
-    .post-comment {
-    }
+    .post-comment {}
 }
 
 .user-bio {
-    max-width: 6rem;
-    min-width: 6rem;
+    max-width  : 6rem;
+    min-width  : 6rem;
     font-weight: 600;
-    word-wrap: break-word;
+    word-wrap  : break-word;
 }
 
 .tweet-box:hover {
@@ -184,9 +218,9 @@ tr:nth-child(even) {
 }
 
 .btn-delete-tweet {
-    border: none;
+    border          : none;
     background-color: transparent;
-    transition: color 0.25s;
+    transition      : color 0.25s;
 }
 
 .btn-delete-tweet:focus {
@@ -198,9 +232,9 @@ tr:nth-child(even) {
 }
 
 .btn-edit-tweet {
-    border: none;
+    border          : none;
     background-color: transparent;
-    transition: color 0.25s;
+    transition      : color 0.25s;
 }
 
 .btn-edit-tweet:focus {
@@ -220,18 +254,18 @@ tr:nth-child(even) {
 }
 
 .profile-image-circle {
-    width: 48px;
-    object-fit: cover;
+    width          : 48px;
+    object-fit     : cover;
     object-position: 50% 50%;
-    border-radius: 50%;
+    border-radius  : 50%;
 }
 
 .profile-image-circle:hover {
     cursor: pointer;
 }
 
-.form > input[type='text'] {
-    border: none;
+.form>input[type='text'] {
+    border          : none;
     background-color: $blue;
 }
 
@@ -245,20 +279,20 @@ tr:nth-child(even) {
 
 .post-tweet {
     input[type='submit'] {
-        font-family: 'Pacifico', cursive;
-        border: none;
-        outline: none;
-        border-radius: 1rem;
-        width: 64px;
-        height: 32px;
-        color: $white;
+        font-family     : 'Pacifico', cursive;
+        border          : none;
+        outline         : none;
+        border-radius   : 1rem;
+        width           : 64px;
+        height          : 32px;
+        color           : $white;
         background-color: $blue;
-        transition: background-color 0.3s, box-shadow 0.3s;
+        transition      : background-color 0.3s, box-shadow 0.3s;
     }
 
     input[type='submit']:hover,
     input[type='submit']:focus {
-        box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.3);
+        box-shadow      : 0 1px 10px 0 rgba(0, 0, 0, 0.3);
         background-color: $indigo;
     }
 
@@ -272,13 +306,13 @@ tr:nth-child(even) {
 }
 
 textarea {
-    border: none;
+    border       : none;
     border-radius: 1rem;
     border-bottom: 1px $gray-800 solid;
-    outline: none;
-    transition: border-bottom-color 0.5s;
-    margin: 0;
-    padding: 0.5rem;
+    outline      : none;
+    transition   : border-bottom-color 0.5s;
+    margin       : 0;
+    padding      : 0.5rem;
 }
 
 textarea:focus {
@@ -287,26 +321,31 @@ textarea:focus {
 }
 
 .scroll-top {
-    position: fixed;
-    bottom: 4rem;
-    right: 4rem;
-    opacity: 0;
+    position  : fixed;
+    bottom    : 4rem;
+    right     : 4rem;
+    opacity   : 0;
     transition: all 0.3s;
-    z-index: 99;
+    z-index   : 99;
 
     button {
-        color: white;
-        border: 0;
-        outline: 0;
-        border-radius: 100%;
-        width: 4rem;
-        height: 4rem;
+        color           : white;
+        border          : 0;
+        outline         : 0;
+        border-radius   : 100%;
+        width           : 4rem;
+        height          : 4rem;
         background-color: $blue;
-        transition: inherit;
+        transition      : inherit;
     }
 
     button:hover {
         background-color: $indigo;
+    }
+
+    @media (max-width: 480px) {
+        bottom: 2rem;
+        right : 2rem;
     }
 }
 
@@ -315,77 +354,68 @@ textarea:focus {
 }
 
 .btn-post-comment {
-    width: 3rem;
-    height: 3rem;
-    border: none;
-    border-radius: 100%;
+    width           : 3rem;
+    height          : 3rem;
+    border          : none;
+    border-radius   : 100%;
     background-color: $blue;
-    transition: background-color 0.3s;
+    transition      : background-color 0.3s;
 }
 
 .btn-post-comment:hover,
 .btn-post-comment:focus {
     background-color: $indigo;
-    outline: none;
+    outline         : none;
 }
 
 .options {
-    border: none;
-    text-align: center;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 100%;
-    color: $blue;
+    border          : none;
+    text-align      : center;
+    width           : 2rem;
+    height          : 2rem;
+    border-radius   : 100%;
+    color           : $blue;
     background-color: transparent;
-    transition: background-color 0.25s, color 0.25s;
+    transition      : background-color 0.25s, color 0.25s;
 }
 
 .options:hover,
 .options:focus {
-    outline: none;
+    outline         : none;
     background-color: $indigo;
-    color: $light-blue;
+    color           : $light-blue;
 }
 
 .profile {
     //width: 100%;
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
+    margin-bottom : 2rem;
+    display       : flex;
+    align-items   : center;
     flex-direction: column;
 
     .avatar {
-        width: 8rem;
-        height: 8rem;
+        width        : 8rem;
+        height       : 8rem;
         border-radius: 50%;
     }
 }
 
 //---overrides
 
-.navbar-nav li:hover > .dropdown-menu {
-    display: block;
-    //margin-top: 0; // remove the gap so it doesn't close
-}
-
 .nav-link {
     transition: color 0.5s;
-}
-
-.dropdown .dropdown-menu {
-    transform-origin: top center;
-    animation: rotateMenuIn 0.3s ease alternate both;
 }
 
 //---keyframes
 @keyframes fadeIn {
     0% {
         transform: translate3d(0, 20%, 0);
-        opacity: 0;
+        opacity  : 0;
     }
+
     100% {
         transform: none;
-        opacity: 1;
+        opacity  : 1;
     }
 }
 
@@ -393,6 +423,7 @@ textarea:focus {
     0% {
         transform: rotateX(-90deg);
     }
+
     100% {
         transform: rotateX(0deg);
     }
@@ -402,6 +433,7 @@ textarea:focus {
     0% {
         transform: rotateX(-90deg);
     }
+
     100% {
         transform: rotateX(0deg);
     }
@@ -411,7 +443,7 @@ textarea:focus {
 @media (max-width: 768px) {
     #app {
         margin: 0;
-        width: 100%;
+        width : 100%;
     }
 
     .tweet-box {

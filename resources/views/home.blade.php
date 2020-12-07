@@ -15,7 +15,7 @@
 
 @guest
 <div class="links text-center">
-    <a href="/login">Log in to see more</a>
+    <a href={{ route('login') }}>Log in to see more</a>
 </div>
 @endguest
 @endsection

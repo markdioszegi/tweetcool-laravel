@@ -13,9 +13,10 @@
                     </div>
                     <div class="p-1">
                         <textarea class="w-100" name="message" type="text" placeholder="Your message..."
-                            data-toggle="tooltip" title="This one too." required></textarea>
+                            data-toggle="tooltip" data-placement="bottom" title="Fill out this field"
+                            required></textarea>
                     </div>
-                    <input class="" type="submit" value="Tweet" />
+                    <input class="mt-5" type="submit" value="Tweet" />
                 </form>
             </div>
         </div>

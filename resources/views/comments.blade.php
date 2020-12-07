@@ -29,10 +29,10 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownOptionsMenu">
                                 <button data-id="{{$comment->id}}" data-token="{{csrf_token()}}"
-                                    class="btn-edit-comment"><i class="fas fa-edit fa-2x"></i>Edit
+                                    class="btn-edit-comment w-100 text-left"><i class="fas fa-edit mr-2"></i>Edit
                                 </button>
                                 <button data-id="{{$comment->id}}" data-token="{{ csrf_token() }}"
-                                    class="btn-delete-comment"><i class="fas fa-trash fa-2x"></i>Remove
+                                    class="btn-delete-comment w-100 text-left"><i class="fas fa-trash mr-2"></i>Remove
                                 </button>
                             </div>
                         </div>

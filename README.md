@@ -53,7 +53,7 @@ php artisan key:generate
     - Then:
 
     ```sql
-    create database "tweetcool-laravel";
+    create database "tweetcool_laravel";
     ```
 
     - Now we have to **migrate** the application's database schema to **pgsql** with `php artisan migrate`

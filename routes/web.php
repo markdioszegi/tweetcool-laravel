@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +21,10 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 // Profile
-//Route::get('/users', 'HomeController@users')->name('users');
+Route::get('/users', 'HomeController@users')->name('users');
 //Route::get('/profile', 'HomeController@profile')->name('profile');
 Route::get('/profile/{id}', 'ProfileController@profile')->name('profile');
+Route::post('/profile/toggleDarkMode', 'ProfileController@toggleDarkMode')->name('toggleDarkMode');
 
 // Tweets
 Route::delete('/tweets/delete/{id}', 'TweetController@delete')->name('delete');
@@ -37,4 +40,3 @@ Route::put('/comments/{id}', 'CommentController@update')->name('update');
 
 //Route::get('/tweets', 'HomeController@tweets')->name('tweets');
 //Route::get('/tweets', 'TweetController@index')->name('tweets');
-
