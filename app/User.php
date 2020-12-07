@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'dark_mode'
     ];
 
     /**
@@ -40,7 +40,8 @@ class User extends Authenticatable
     /**
      * This function gets all
      */
-    public function tweets() {
+    public function tweets()
+    {
         return $this->hasMany('App\Tweet');
     }
 }
