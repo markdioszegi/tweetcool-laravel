@@ -8,11 +8,15 @@
 -   Laravel (^7.0)
 -   PostgreSQL (^12.4)
 
-# About the app
+# About the application
 
 ### A really simple CRUD application based on Twitter with a little difference. Using the Laravel framework, PHP as backend and originally VueJS. I implemented some AJAX calls too, but overall it is a multi page application (MPA).
 
+---
+
 ### It is currently deployed to [Heroku](https://www.heroku.com/) which is a beautifully clean Cloud Application Platform and it is free!
+
+### You can view the application [Here](http://tweetcool.herokuapp.com/).
 
 # User stories
 
@@ -66,6 +70,25 @@ php artisan key:generate
 
 5. Now it's time to start the server with `php artisan serve`.
 
+# Deployment
+
+## For deploying the application refer to the [laravel](https://laravel.com/docs/7.x/deployment) documentation.
+
+For a short guide
+
+1. Configuring the `.env` file
+
+    - `APP_ENV` value should be `production`
+    - `APP_DEBUG` value should be `false` to avoid printing sensitive information to the user
+
+2. Composer and NPM
+
+    - run `composer install --optimize-autoloader --no-dev`
+    - also run `npm run prod` and try to remove unnecessary packages to minimize the `app.js` file size
+
+3. Artisan commands
+    - cache config/route/view loading
+
 # Features
 
 ## Web routes
@@ -74,9 +97,18 @@ php artisan key:generate
     -   guests can log in or register an account via the `/login` and `/register` routes
     -   users can view the global feed
 -   /profile/{id} - The users profile page
+-   /users - for debug purposes
+
+## Authentication
+
+-   Basic register and login system.
 
 ## Tweeting
 
 -   Users can tweet about anything
 -   They can modify their tweets (delete/update)
 -   Possibility to leave a comment under the tweet (AJAX delete/update)
+
+## Extra
+
+-   Nearly functional dark mode
