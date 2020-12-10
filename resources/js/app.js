@@ -7,8 +7,6 @@
 require('./bootstrap')
 import Confirm from './confirm'
 import autosize from 'autosize'
-import { ajax } from 'jquery'
-import { method } from 'lodash'
 
 /**
  * Globals

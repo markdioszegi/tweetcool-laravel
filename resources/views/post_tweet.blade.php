@@ -10,7 +10,7 @@
                     <div class="p-1">
                         @error('topic')
                         <div class="alert alert-danger" role="alert">
-                            Topic name is too long!
+                            Topic name is invalid!
                         </div>
                         @enderror
                         <input autocomplete="off" class="" name="topic" type="text" placeholder="Topic name..."

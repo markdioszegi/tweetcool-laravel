@@ -5,11 +5,14 @@
 -   PHP (^7.4.3)
 -   NPM (^6.14.4)
 -   Composer (^1.10.1)
+-   Laravel (^7.0)
 -   PostgreSQL (^12.4)
 
 # About the app
 
 ### A really simple CRUD application based on Twitter with a little difference. Using the Laravel framework, PHP as backend and originally VueJS. I implemented some AJAX calls too, but overall it is a multi page application (MPA).
+
+### It is currently deployed to [Heroku](https://www.heroku.com/) which is a beautifully clean Cloud Application Platform and it is free!
 
 # User stories
 
@@ -44,6 +47,9 @@ php artisan key:generate
 
 4. It is necessary to configure the database in `.env` too (PostgreSQL by default)
 
+
+    >In config/database.php the default database should be the database you wish to use (mysql by default, pgsql for this app)!
+
     - Log in to postgres via **psql** (or use PgAdmin) with an arbitrary user (default is _postgres_)
 
     ```
@@ -56,9 +62,9 @@ php artisan key:generate
     create database "tweetcool_laravel";
     ```
 
-    - Now we have to **migrate** the application's database schema to **pgsql** with `php artisan migrate`
+    - It is important to **migrate** the application's database schema to **pgsql** with `php artisan migrate`
 
-5. Now it's time to start the server with `php artisan serve`
+5. Now it's time to start the server with `php artisan serve`.
 
 # Features
 
@@ -74,5 +80,3 @@ php artisan key:generate
 -   Users can tweet about anything
 -   They can modify their tweets (delete/update)
 -   Possibility to leave a comment under the tweet (AJAX delete/update)
-
-TODO: Validating everything (posting tweet, editing tweet, posting comment, editing comment, )
