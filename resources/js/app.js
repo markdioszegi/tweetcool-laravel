@@ -200,11 +200,11 @@ $('.comments-container')
     })
 
 $('[aria-expanded]').change(function() {
-    console.log('changed!')
+    //console.log('changed!')
 })
 
-$('#toggleDarkMode').change(function() {
-    if ($(this).prop('checked')) {
+$('#toggleDarkMode').on('click', function() {
+    if ($(this).hasClass('fa-moon')) {
         $.ajax({
             method: 'POST',
             data: {
@@ -213,10 +213,12 @@ $('#toggleDarkMode').change(function() {
             },
             url: BASE_URL + '/profile/toggleDarkMode',
             success: function(data) {
-                console.log(data)
+                //console.log(data)
             },
         })
-        $('body').addClass('dark-mode')
+        $('html').attr('theme', 'dark-mode')
+        $(this).removeClass('fas fa-moon')
+        $(this).addClass('fas fa-sun')
     } else {
         $.ajax({
             method: 'POST',
@@ -226,10 +228,12 @@ $('#toggleDarkMode').change(function() {
             },
             url: BASE_URL + '/profile/toggleDarkMode',
             success: function(data) {
-                console.log(data)
+                //console.log(data)
             },
         })
-        $('body').removeClass('dark-mode')
+        $('html').attr('theme', 'light-mode')
+        $(this).removeClass('fas fa-sun')
+        $(this).addClass('fas fa-moon')
     }
 })
 
@@ -253,7 +257,6 @@ $('.btn-post-comment').click(function(e) {
         .find('textarea')
         .val()
         .trim()
-    if (!msg) console.log('Empty text!')
     $.ajax({
         url: BASE_URL + '/comments/store',
         type: 'post',
@@ -268,8 +271,14 @@ $('.btn-post-comment').click(function(e) {
         success: function() {
             window.location.reload(true)
         },
-        error: function(err, vm, info) {
-            console.log(info)
+        error: function(err) {
+            Confirm.open({
+                title: 'Error',
+                message: err.responseJSON.errors.message[0],
+                okText: 'OK',
+                cancelText: '',
+                onok: () => {},
+            })
         },
     })
 })
@@ -278,6 +287,7 @@ $('.btn-edit-comment').on('click', function() {
     let $message = $(this)
         .closest('.comment')
         .find('.message')
+    let originalMessage = $message.text()
     let $button = $(this)
     let textEle = document.createElement('span')
 
@@ -300,8 +310,6 @@ $('.btn-edit-comment').on('click', function() {
                 let token = $button.data('token')
                 let msg = $.trim($message.text())
 
-                console.log(msg)
-
                 e.preventDefault()
                 $message.attr('contenteditable', false)
                 $message.removeClass('editing')
@@ -316,8 +324,15 @@ $('.btn-edit-comment').on('click', function() {
                         message: msg,
                         _token: token,
                     },
-                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        console.error(errorThrown)
+                    error: function(err) {
+                        $message.text(originalMessage)
+                        Confirm.open({
+                            title: 'Error',
+                            message: err.responseJSON.errors.message[0],
+                            okText: 'OK',
+                            cancelText: '',
+                            onok: () => {},
+                        })
                     },
                 })
             }

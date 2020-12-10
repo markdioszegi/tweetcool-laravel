@@ -8,14 +8,25 @@
                 <form class="text-center w-100" action="/tweets/store" method="post">
                     @csrf
                     <div class="p-1">
+                        @error('topic')
+                        <div class="alert alert-danger" role="alert">
+                            Topic name is too long!
+                        </div>
+                        @enderror
                         <input autocomplete="off" class="" name="topic" type="text" placeholder="Topic name..."
-                            maxlength="255" required />
+                            maxlength="{{ config('app.max_topic_len') }}" required />
                     </div>
                     <div class="p-1">
+                        @error('message')
+                        <div class="alert alert-danger" role="alert">
+                            Message is invalid!
+                        </div>
+                        @enderror
                         <textarea class="w-100" name="message" type="text" placeholder="Your message..."
                             data-toggle="tooltip" data-placement="bottom" title="Fill out this field"
-                            required></textarea>
+                            maxlength="{{ config('app.max_message_len') }}" required></textarea>
                     </div>
+
                     <input class="mt-5" type="submit" value="Tweet" />
                 </form>
             </div>

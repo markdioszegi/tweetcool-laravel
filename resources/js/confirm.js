@@ -1,18 +1,25 @@
 const Confirm = {
     open(options) {
-        options = Object.assign({}, {
-            title: '',
-            message: '',
-            okText: 'OK',
-            cancelText: 'Cancel',
-            onok: function () {
+        options = Object.assign(
+            {},
+            {
+                title: '',
+                message: '',
+                okText: 'OK',
+                cancelText: 'Cancel',
+                onok: function() {},
+                oncancel: function() {},
             },
-            oncancel: function () {
-            }
-        }, options);
+            options
+        )
 
-        const html = `
-            <div class="confirm">
+        document.activeElement.blur()
+
+        let html = ''
+
+        if (options.cancelText) {
+            html = `
+            <div tabindex="-1" role="dialog" class="confirm">
                 <div class="confirm__window">
                     <div class="confirm__titlebar">
                         <i class="fas fa-exclamation-circle fa-2x text-danger"></i>
@@ -25,47 +32,62 @@ const Confirm = {
                         <button class="confirm__button confirm__button--cancel">${options.cancelText}</button>
                     </div>
                 </div>
-            </div>
-        `;
+            </div>`
+        } else {
+            html = `
+            <div tabindex="-1" role="dialog" class="confirm">
+                <div class="confirm__window">
+                    <div class="confirm__titlebar">
+                        <i class="fas fa-exclamation-circle fa-2x text-danger"></i>
+                        <span class="confirm__title">${options.title}</span>
+                        <button class="confirm__close">&times;</button>
+                    </div>
+                    <div class="confirm__content">${options.message}</div>
+                    <div class="confirm__buttons">
+                        <button class="confirm__button confirm__button--ok confirm__button--fill">${options.okText}</button>
+                    </div>
+                </div>
+            </div>`
+        }
 
-        const template = document.createElement('template');
-        template.innerHTML = html;
+        const template = document.createElement('template')
+        template.innerHTML = html
 
         // Elements
-        const confirmEl = template.content.querySelector('.confirm');
-        const btnClose = template.content.querySelector('.confirm__close');
-        const btnOk = template.content.querySelector('.confirm__button--ok');
-        const btnCancel = template.content.querySelector('.confirm__button--cancel');
+        const confirmEl = template.content.querySelector('.confirm')
+        const btnClose = template.content.querySelector('.confirm__close')
+        const btnOk = template.content.querySelector('.confirm__button--ok')
+        const btnCancel = template.content.querySelector('.confirm__button--cancel')
 
         confirmEl.addEventListener('click', e => {
             if (e.target === confirmEl) {
-                options.oncancel();
-                this._close(confirmEl);
+                options.oncancel()
+                this._close(confirmEl)
             }
-        });
+        })
 
         btnOk.addEventListener('click', () => {
-            options.onok();
-            this._close(confirmEl);
-        });
+            options.onok()
+            this._close(confirmEl)
+        })
+        if (btnCancel)
+            [btnCancel, btnClose].forEach(el => {
+                el.addEventListener('click', () => {
+                    options.oncancel()
+                    this._close(confirmEl)
+                })
+            })
 
-        [btnCancel, btnClose].forEach(el => {
-            el.addEventListener('click', () => {
-                options.oncancel();
-                this._close(confirmEl);
-            });
-        });
-
-        document.body.appendChild(template.content);
+        document.body.appendChild(template.content)
     },
 
     _close(confirmEl) {
-        confirmEl.classList.add('confirm--close');
+        confirmEl.classList.add('confirm--close')
 
         confirmEl.addEventListener('animationend', () => {
-            document.body.removeChild(confirmEl);
-        });
-    }
-};
+            document.body.removeChild(confirmEl)
+        })
+    },
+}
 
-export default Confirm;
+export default Confirm

@@ -74,3 +74,5 @@ php artisan key:generate
 -   Users can tweet about anything
 -   They can modify their tweets (delete/update)
 -   Possibility to leave a comment under the tweet (AJAX delete/update)
+
+TODO: Validating everything (posting tweet, editing tweet, posting comment, editing comment, )

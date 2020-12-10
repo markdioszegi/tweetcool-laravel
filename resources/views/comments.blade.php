@@ -16,9 +16,8 @@
                                 {{ \App\User::find($comment->user_id)->name }}
                             </a>
                         </small>
-                        <small>—</small>
                         {{-- Display time --}}
-                        <small>{{$comment->created_at->diffForHumans()}}</small>
+                        <small class="user-select-none">— {{$comment->created_at->diffForHumans()}}</small>
                         <!-- If the user is the owner -->
                         @auth
                         @if($comment->user_id == auth()->id())
@@ -55,7 +54,8 @@
         @auth
         <div class="d-flex align-items-start post-comment">
             <div class="flex-fill mr-3">
-                <textarea maxlength="300" class="w-100" placeholder="Leave a comment..." required></textarea>
+                <textarea maxlength="{{ config("app.max_comment_len") }}" class="w-100" placeholder="Leave a comment..."
+                    required></textarea>
             </div>
             <button class="btn-post-comment" data-tweet-id="{{$tweet->id}}"
                 data-user-id="{{auth()->user()->getAuthIdentifier()}}" data-token="{{csrf_token()}}"><i

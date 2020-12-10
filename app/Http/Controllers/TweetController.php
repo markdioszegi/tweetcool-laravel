@@ -30,8 +30,8 @@ class TweetController extends Controller
     public function update($id, Request $request)
     {
         $request->validate([
-            'message' => 'required|min:1',
-            'topic' => 'required'
+            'topic' => 'required|max:' . config('app.max_topic_len'),
+            'message' => 'required|max:'  . config('app.max_message_len'),
         ]);
 
         $tweet = Tweet::find($id);
@@ -60,8 +60,8 @@ class TweetController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'topic' => 'required',
-            'message' => 'required'
+            'topic' => 'required|max:' . config('app.max_topic_len'),
+            'message' => 'required|max:'  . config('app.max_message_len'),
         ]);
 
         $tweet = new Tweet;

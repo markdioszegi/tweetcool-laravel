@@ -9,6 +9,10 @@ class CommentController extends Controller
 {
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'message' => 'required|max:' . config("app.max_comment_len")
+        ]);
+
         $comment = new Comment;
         $comment->message = $request->message;
         $comment->tweet_id = $request->tweet_id;
@@ -20,7 +24,8 @@ class CommentController extends Controller
         return false;
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         Comment::destroy($id);
         return response()->json([
             'success' => 'Comment has been deleted!',
@@ -29,6 +34,10 @@ class CommentController extends Controller
 
     public function update(Request $request)
     {
+        $this->validate($request, [
+            'message' => 'required|max:' . config("app.max_comment_len")
+        ]);
+
         $comment = Comment::find($request->id);
         if ($comment) {
             $comment->message = $request->message;

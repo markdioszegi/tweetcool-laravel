@@ -11,7 +11,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Ruda:wght@400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-html,
 body {
     font-size                 : calc(14px + 0.1vw);
     transition-timing-function: cubic-bezier(0.21, 0.8, 0.24, 1);
@@ -20,6 +19,11 @@ body {
     font-weight               : 200;
     -webkit-font-smoothing    : antialiased;
     margin                    : 0;
+    overflow-wrap             : anywhere;
+}
+
+[contenteditable="true"] {
+    overflow-wrap: anywhere;
 }
 
 img {
@@ -31,9 +35,39 @@ img {
     transform                  : translateZ(0);
 }
 
-/* main {
-    min-height: 65.9118vh;
-} */
+html {
+    transition: color .3s, background-color .3s;
+}
+
+html[theme='dark-mode'] {
+    filter: invert(1) hue-rotate(180deg);
+}
+
+html[theme='dark-mode'] {
+    filter: invert(1) hue-rotate(180deg);
+
+    img {
+        filter: invert(1) hue-rotate(180deg);
+    }
+
+    footer {
+        filter: invert(1) hue-rotate(180deg);
+    }
+
+    .post-tweet {
+        input[type="submit"] {
+            filter: invert(1) hue-rotate(180deg);
+        }
+    }
+
+    .confirm {
+        filter: invert(1) hue-rotate(180deg);
+    }
+}
+
+main {
+    //min-height: 65.895vh;
+}
 
 //body {
 //    background: linear-gradient(360deg, $indigo 0%, $blue 100%);
@@ -270,11 +304,14 @@ tr:nth-child(even) {
 }
 
 .btn-toggle-dark-mode {
-    border-radius: 100%;
-}
+    padding      : .5rem;
+    cursor       : pointer;
+    transition   : background-color .2s;
+    border-radius: 50%;
 
-.dark-mode {
-    filter: invert(1) hue-rotate(180deg);
+    &:hover {
+        background-color: darken($body-bg, 10%);
+    }
 }
 
 .post-tweet {

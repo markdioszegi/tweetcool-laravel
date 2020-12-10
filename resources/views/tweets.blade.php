@@ -10,10 +10,10 @@
                 {{--<small>ID: {{ $tweet->id }}</small>--}}
             </div>
             <!-- Message section -->
-            <div class="flex-fill">
+            <div class="flex-fill mr-5">
                 <h3>{{ $tweet->topic }}</h3>
                 <p>{{ $tweet->message }}</p>
-                <small class="text-muted float-right" data-toggle="tooltip"
+                <small class="text-muted float-right user-select-none" data-toggle="tooltip"
                     title="{{$tweet->created_at->format('d F Y h:m:s')}}">{{ $tweet->created_at->diffForHumans() }}</small>
             </div>
             <!-- Options section -->

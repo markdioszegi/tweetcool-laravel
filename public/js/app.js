@@ -37743,11 +37743,10 @@ $('.comments-container').find('textarea').keydown(function (e) {
     $(this).closest('.post-comment').find('button').click();
   }
 });
-$('[aria-expanded]').change(function () {
-  console.log('changed!');
+$('[aria-expanded]').change(function () {//console.log('changed!')
 });
-$('#toggleDarkMode').change(function () {
-  if ($(this).prop('checked')) {
+$('#toggleDarkMode').on('click', function () {
+  if ($(this).hasClass('fa-moon')) {
     $.ajax({
       method: 'POST',
       data: {
@@ -37755,11 +37754,12 @@ $('#toggleDarkMode').change(function () {
         _token: $(this).data('token')
       },
       url: BASE_URL + '/profile/toggleDarkMode',
-      success: function success(data) {
-        console.log(data);
+      success: function success(data) {//console.log(data)
       }
     });
-    $('body').addClass('dark-mode');
+    $('html').attr('theme', 'dark-mode');
+    $(this).removeClass('fas fa-moon');
+    $(this).addClass('fas fa-sun');
   } else {
     $.ajax({
       method: 'POST',
@@ -37768,11 +37768,12 @@ $('#toggleDarkMode').change(function () {
         _token: $(this).data('token')
       },
       url: BASE_URL + '/profile/toggleDarkMode',
-      success: function success(data) {
-        console.log(data);
+      success: function success(data) {//console.log(data)
       }
     });
-    $('body').removeClass('dark-mode');
+    $('html').attr('theme', 'light-mode');
+    $(this).removeClass('fas fa-sun');
+    $(this).addClass('fas fa-moon');
   }
 });
 $('.btn-scroll-top').click(function () {
@@ -37788,7 +37789,6 @@ $('.btn-post-comment').click(function (e) {
   var userId = $(this).data('user-id');
   var token = $(this).data('token');
   var msg = $(this).parent().find('textarea').val().trim();
-  if (!msg) console.log('Empty text!');
   $.ajax({
     url: BASE_URL + '/comments/store',
     type: 'post',
@@ -37803,13 +37803,20 @@ $('.btn-post-comment').click(function (e) {
     success: function success() {
       window.location.reload(true);
     },
-    error: function error(err, vm, info) {
-      console.log(info);
+    error: function error(err) {
+      _confirm__WEBPACK_IMPORTED_MODULE_0__["default"].open({
+        title: 'Error',
+        message: err.responseJSON.errors.message[0],
+        okText: 'OK',
+        cancelText: '',
+        onok: function onok() {}
+      });
     }
   });
 });
 $('.btn-edit-comment').on('click', function () {
   var $message = $(this).closest('.comment').find('.message');
+  var originalMessage = $message.text();
   var $button = $(this);
   var textEle = document.createElement('span');
 
@@ -37828,7 +37835,6 @@ $('.btn-edit-comment').on('click', function () {
         var id = $button.data('id');
         var token = $button.data('token');
         var msg = $.trim($message.text());
-        console.log(msg);
         e.preventDefault();
         $message.attr('contenteditable', false);
         $message.removeClass('editing');
@@ -37843,8 +37849,15 @@ $('.btn-edit-comment').on('click', function () {
             message: msg,
             _token: token
           },
-          error: function error(XMLHttpRequest, textStatus, errorThrown) {
-            console.error(errorThrown);
+          error: function error(err) {
+            $message.text(originalMessage);
+            _confirm__WEBPACK_IMPORTED_MODULE_0__["default"].open({
+              title: 'Error',
+              message: err.responseJSON.errors.message[0],
+              okText: 'OK',
+              cancelText: '',
+              onok: function onok() {}
+            });
           }
         });
       }
@@ -37931,7 +37944,15 @@ var Confirm = {
       onok: function onok() {},
       oncancel: function oncancel() {}
     }, options);
-    var html = "\n            <div class=\"confirm\">\n                <div class=\"confirm__window\">\n                    <div class=\"confirm__titlebar\">\n                        <i class=\"fas fa-exclamation-circle fa-2x text-danger\"></i>\n                        <span class=\"confirm__title\">".concat(options.title, "</span>\n                        <button class=\"confirm__close\">&times;</button>\n                    </div>\n                    <div class=\"confirm__content\">").concat(options.message, "</div>\n                    <div class=\"confirm__buttons\">\n                        <button class=\"confirm__button confirm__button--ok confirm__button--fill\">").concat(options.okText, "</button>\n                        <button class=\"confirm__button confirm__button--cancel\">").concat(options.cancelText, "</button>\n                    </div>\n                </div>\n            </div>\n        ");
+    document.activeElement.blur();
+    var html = '';
+
+    if (options.cancelText) {
+      html = "\n            <div tabindex=\"-1\" role=\"dialog\" class=\"confirm\">\n                <div class=\"confirm__window\">\n                    <div class=\"confirm__titlebar\">\n                        <i class=\"fas fa-exclamation-circle fa-2x text-danger\"></i>\n                        <span class=\"confirm__title\">".concat(options.title, "</span>\n                        <button class=\"confirm__close\">&times;</button>\n                    </div>\n                    <div class=\"confirm__content\">").concat(options.message, "</div>\n                    <div class=\"confirm__buttons\">\n                        <button class=\"confirm__button confirm__button--ok confirm__button--fill\">").concat(options.okText, "</button>\n                        <button class=\"confirm__button confirm__button--cancel\">").concat(options.cancelText, "</button>\n                    </div>\n                </div>\n            </div>");
+    } else {
+      html = "\n            <div tabindex=\"-1\" role=\"dialog\" class=\"confirm\">\n                <div class=\"confirm__window\">\n                    <div class=\"confirm__titlebar\">\n                        <i class=\"fas fa-exclamation-circle fa-2x text-danger\"></i>\n                        <span class=\"confirm__title\">".concat(options.title, "</span>\n                        <button class=\"confirm__close\">&times;</button>\n                    </div>\n                    <div class=\"confirm__content\">").concat(options.message, "</div>\n                    <div class=\"confirm__buttons\">\n                        <button class=\"confirm__button confirm__button--ok confirm__button--fill\">").concat(options.okText, "</button>\n                    </div>\n                </div>\n            </div>");
+    }
+
     var template = document.createElement('template');
     template.innerHTML = html; // Elements
 
@@ -37951,7 +37972,7 @@ var Confirm = {
 
       _this._close(confirmEl);
     });
-    [btnCancel, btnClose].forEach(function (el) {
+    if (btnCancel) [btnCancel, btnClose].forEach(function (el) {
       el.addEventListener('click', function () {
         options.oncancel();
 

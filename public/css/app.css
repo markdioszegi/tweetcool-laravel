@@ -11091,7 +11091,6 @@ a.text-dark:focus {
   }
 }
 
-html,
 body {
   font-size: calc(14px + 0.1vw);
   transition-timing-function: cubic-bezier(0.21, 0.8, 0.24, 1);
@@ -11100,6 +11099,11 @@ body {
   font-weight: 200;
   -webkit-font-smoothing: antialiased;
   margin: 0;
+  overflow-wrap: anywhere;
+}
+
+[contenteditable=true] {
+  overflow-wrap: anywhere;
 }
 
 img {
@@ -11109,9 +11113,33 @@ img {
   transform: translateZ(0);
 }
 
-/* main {
-    min-height: 65.9118vh;
-} */
+html {
+  transition: color 0.3s, background-color 0.3s;
+}
+
+html[theme=dark-mode] {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+html[theme=dark-mode] {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+html[theme=dark-mode] img {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+html[theme=dark-mode] footer {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+html[theme=dark-mode] .post-tweet input[type=submit] {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+html[theme=dark-mode] .confirm {
+  filter: invert(1) hue-rotate(180deg);
+}
 
 /*width*/
 
@@ -11341,11 +11369,14 @@ tr:nth-child(even) {
 }
 
 .btn-toggle-dark-mode {
-  border-radius: 100%;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-radius: 50%;
 }
 
-.dark-mode {
-  filter: invert(1) hue-rotate(180deg);
+.btn-toggle-dark-mode:hover {
+  background-color: #d4e1ed;
 }
 
 .post-tweet input[type=submit] {

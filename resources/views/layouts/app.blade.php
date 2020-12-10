@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+    theme="{{ Auth::check() && Auth::user()->dark_mode ? 'dark-mode' : 'light-mode' }}">
 
 <head>
     <meta charset="utf-8">
@@ -20,9 +21,9 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 </head>
 
-<body class="{{ Auth::user()->dark_mode ? 'dark-mode' : '' }}">
+<body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm font-weight-bold">
             <a class="navbar-brand float-right" href="{{ url('/') }}">
                 {{-- config('app.name', 'Tweetcool') --}}
                 <img class="logo" src={{asset('img/logo.svg')}}></img>
@@ -38,9 +39,9 @@
                     <!-- Light/Dark mode toggle button -->
                     @auth
                     <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Toggle Dark Mode">
-                        <i class="fas fa-moon"></i>
-                        <input {{ Auth::user()->dark_mode ? 'checked' : '' }} class="btn-toggle-dark-mode"
-                            type="checkbox" id="toggleDarkMode" data-token="{{csrf_token()}}">
+                        <i id="toggleDarkMode"
+                            class="{{ Auth::user()->dark_mode ? 'fas fa-sun' : 'fas fa-moon' }} btn-toggle-dark-mode"
+                            data-token="{{csrf_token()}}"></i>
                     </li>
                     @endauth
                 </ul>

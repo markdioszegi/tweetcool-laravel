@@ -141,6 +141,9 @@ return [
     */
 
     'max_tweets' => 3,
+    'max_topic_len' => 255,
+    'max_message_len' => 2048,
+    'max_comment_len' => 512,
 
     'providers' => [
 
