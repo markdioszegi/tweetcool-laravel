@@ -111,4 +111,4 @@ For a short guide
 
 ## Extra
 
--   Nearly functional dark mode
+-   Functional user specific dark mode
